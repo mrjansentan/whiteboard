@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Classroom Whiteboard Widgets v2</title>
+    <title>Whiteboard by Mr. Jansen Tan</title>
     <style>
     :root {
         --bg: #f4f1ea;
@@ -1892,6 +1892,304 @@
 
     .text-widget.tools-hidden .text-editor {
         min-height: 100% !important;
+    }/* FINAL COHERENT TEXT WIDGET */
+
+    .text-widget {
+        width: 560px;
+        min-height: 340px;
+        background: #ffffff !important;
+        border: 2px solid #111827 !important;
+        border-radius: 14px !important;
+        box-shadow: 5px 5px 0 #111827 !important;
+        overflow: visible !important;
+    }
+
+    .text-widget > .widget-header {
+        display: flex !important;
+    }
+
+    .text-widget .widget-body {
+        height: calc(100% - 42px) !important;
+        padding: 10px !important;
+        overflow: visible !important;
+        background: #ffffff !important;
+        border-radius: 0 0 12px 12px !important;
+    }
+
+    .text-widget .text-body {
+        height: 100% !important;
+        display: grid !important;
+        grid-template-rows: auto 1fr !important;
+        gap: 8px !important;
+    }
+
+    .text-widget.tools-hidden .text-body {
+        grid-template-rows: 1fr !important;
+    }
+
+    .text-widget .text-tools {
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        padding: 7px !important;
+        background: #f8fafc !important;
+        border: 2px solid #e5e7eb !important;
+        border-radius: 12px !important;
+        box-shadow: none !important;
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: none !important;
+        overflow: visible !important;
+    }
+
+    .text-widget.tools-hidden .text-tools {
+        display: none !important;
+    }
+
+    .text-widget .text-tools select, .text-widget .text-tools input[type="number"] {
+        height: 34px !important;
+        border: 2px solid #111827 !important;
+        border-radius: 10px !important;
+        padding: 4px 8px !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        font-size: 13px !important;
+        font-weight: 800 !important;
+        box-shadow: none !important;
+    }
+
+    .text-widget .text-tools select {
+        min-width: 112px !important;
+        max-width: 145px !important;
+    }
+
+    .text-widget .text-tools input[type="number"] {
+        width: 62px !important;
+        text-align: center !important;
+    }
+
+    .text-widget .text-tools input[type="color"] {
+        width: 34px !important;
+        height: 34px !important;
+        border: 2px solid #111827 !important;
+        border-radius: 10px !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+    }
+
+    .text-widget .text-tools button {
+        height: 34px !important;
+        min-width: 34px !important;
+        padding: 4px 8px !important;
+        border: 2px solid #111827 !important;
+        border-radius: 10px !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+        font-size: 13px !important;
+        font-weight: 900 !important;
+    }
+
+    .text-widget .text-tools button:hover {
+        background: #fff7ed !important;
+    }
+
+    .text-widget .text-tools button.active {
+        background: #f97316 !important;
+        color: #ffffff !important;
+    }
+
+    .text-widget .text-toolbar-divider {
+        width: 2px;
+        height: 30px;
+        background: #e5e7eb;
+        margin: 0 2px;
+    }
+
+    .text-widget .text-editor {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 190px !important;
+        border: 2px solid #111827 !important;
+        border-radius: 12px !important;
+        background: #ffffff !important;
+        box-shadow: none !important;
+        padding: 16px 18px !important;
+        outline: none !important;
+        overflow: auto !important;
+        font-size: 28px;
+        line-height: 1.35;
+        color: #111827;
+    }
+
+    .text-widget .text-editor:empty::before {
+        content: "Enter your text here..." !important;
+        color: #8a8a8a !important;
+        font-style: italic !important;
+        font-weight: 400 !important;
+        pointer-events: none !important;
+    }
+
+    .text-widget.selected .text-editor, .text-widget.multi-selected .text-editor {
+        outline: none !important;
+    }
+
+    .text-widget .text-symbol-panel {
+        display: none;
+        grid-column: 1 / -1;
+        width: 100%;
+        padding: 6px;
+        background: #ffffff;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+    }
+
+    .text-widget .text-symbol-panel.open {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+
+    .text-widget .text-symbol-panel button {
+        height: 28px !important;
+        min-width: 30px !important;
+        padding: 2px 6px !important;
+        font-size: 13px !important;
+        box-shadow: 1px 1px 0 #111827 !important;
+    }
+
+    .text-widget .text-show-tools {
+        display: none;
+        position: absolute;
+        left: 12px;
+        top: 50px;
+        z-index: 500;
+    }
+
+    .text-widget.tools-hidden.selected .text-show-tools, .text-widget.tools-hidden.multi-selected .text-show-tools {
+        display: block;
+    }/* FINAL GLOBAL UI SCALE DOWN 15% */
+
+    .toolbar button, .toolbar .file-btn, .toolbar select {
+        font-size: calc(clamp(10px, 1.05vw, 14px) * 0.85) !important;
+        padding: calc(clamp(4px, 0.55vw, 7px) * 0.85) calc(clamp(6px, 0.8vw, 10px) * 0.85) !important;
+        min-height: calc(clamp(28px, 3.2vw, 36px) * 0.85) !important;
+    }
+
+    .toolbar-group.widget-buttons .widget-btn, .toolbar-group.widget-buttons .file-btn.widget-btn {
+        font-size: calc(clamp(10px, 1.15vw, 14px) * 0.85) !important;
+        padding: calc(clamp(5px, 0.6vw, 8px) * 0.85) calc(clamp(7px, 0.9vw, 11px) * 0.85) !important;
+        min-height: calc(clamp(30px, 3.4vw, 38px) * 0.85) !important;
+    }
+
+    .widget-header {
+        height: 36px !important;
+        padding: 6px 9px !important;
+    }
+
+    .widget-title {
+        font-size: 85% !important;
+    }
+
+    .drag-hint {
+        font-size: 10px !important;
+    }
+
+    .icon-btn {
+        width: 24px !important;
+        height: 24px !important;
+        min-width: 24px !important;
+        font-size: 13px !important;
+    }
+
+    .widget-body {
+        height: calc(100% - 36px) !important;
+    }
+
+    button.small, .small {
+        font-size: 11px !important;
+        padding: 4px 7px !important;
+    }
+
+    .card-title, .field, .muted, .toolbar-note {
+        font-size: 85% !important;
+    }
+
+    .text-widget .text-tools button, .text-widget .text-tools select, .text-widget .text-tools input[type="number"] {
+        font-size: 11px !important;
+        height: 29px !important;
+        min-height: 29px !important;
+    }
+
+    .text-widget .text-tools input[type="color"] {
+        width: 29px !important;
+        height: 29px !important;
+    }
+
+    .text-widget .text-editor {
+        font-size: calc(28px * 0.85) !important;
+    }
+
+    .timer-num, .timer-time .mins, .timer-time .secs {
+        font-size: clamp(46px, 6.8vw, 70px) !important;
+    }
+
+    .timer-colon, .timer-time .timer-colon {
+        font-size: clamp(38px, 5.2vw, 54px) !important;
+    }
+
+    .timer-adjust .nudge, .nudge {
+        font-size: 20px !important;
+    }
+
+    .round, .timer-round-btn {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 18px !important;
+    }
+
+    .clock-digital {
+        font-size: clamp(34px, 7.6vw, 65px) !important;
+    }
+
+    .exam-date {
+        font-size: clamp(19px, 3.4vw, 29px) !important;
+    }
+
+    .exam-clock {
+        font-size: clamp(43px, 8.5vw, 75px) !important;
+    }
+
+    .exam-widget .card-value, .card-value {
+        font-size: calc(30px * 0.85) !important;
+    }
+
+    .exam-subject .card-value {
+        font-size: clamp(25px, 5vw, 44px) !important;
+    }
+
+    .wheel-winner-label {
+        font-size: clamp(15px, 2.55vw, 24px) !important;
+    }
+
+    .wheel-winner-name {
+        font-size: clamp(48px, 10.2vw, 110px) !important;
+    }
+
+    @media (max-width: 1100px) {
+        .toolbar button, .toolbar .file-btn, .toolbar select {
+            font-size: 9px !important;
+            padding: 4px 5px !important;
+            min-height: 26px !important;
+        }
+
+        .toolbar-group.widget-buttons .widget-btn, .toolbar-group.widget-buttons .file-btn.widget-btn {
+            font-size: 9.3px !important;
+            padding: 5px 6px !important;
+            min-height: 27px !important;
+        }
     }
     </style>
 </head>
@@ -2805,22 +3103,52 @@
         }
 
         function addText(data={}) {
-            const {item, body} = makeItem("text", "Text", 560, 330, data);
+            const {item, body} = makeItem("text", "Text", 560, 340, data);
             body.innerHTML = `
+                  <button class="small text-show-tools" type="button">Show tools</button>
                   <div class="text-body">
                     <div class="text-tools">
-                      <select class="font"><option value="system-ui,sans-serif">System</option><option value="Arial,sans-serif">Arial</option><option value="Georgia,serif">Georgia</option><option value='Courier New,monospace'>Courier</option></select>
-                      <input class="size clean-input" type="number" min="10" max="160" value="28" style="width:72px">
-                      <button class="small b">B</button><button class="small i"><i>I</i></button><button class="small u"><u>U</u></button>
-                      <button class="small sub">x₂</button><button class="small sup">x²</button>
-                      <button class="small left">←</button><button class="small centre">☰</button><button class="small right">→</button><button class="small list">•</button>
-                      <input class="colour" type="color" value="#111827"><button class="small trans">Transparent</button>
-                      <details><summary>Chem symbols</summary><div class="script-pad">${["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉", "⁺", "⁻", "²", "³", "→", "⇌"].map(s => `<button class="small sym" data-s="${s}">${s}</button>`).join("")}</div></details>
+                      <select class="font" title="Font">
+                        <option value="system-ui,sans-serif">System</option>
+                        <option value="Arial,sans-serif">Arial</option>
+                        <option value="Georgia,serif">Georgia</option>
+                        <option value="'Courier New',monospace">Courier</option>
+                        <option value="'Comic Sans MS',cursive">Comic</option>
+                      </select>
+                      <input class="size" type="number" min="10" max="160" value="28" title="Font size">
+
+                      <span class="text-toolbar-divider"></span>
+
+                      <button class="b" type="button" title="Bold">B</button>
+                      <button class="i" type="button" title="Italic"><i>I</i></button>
+                      <button class="u" type="button" title="Underline"><u>U</u></button>
+                      <button class="sub" type="button" title="Subscript">x₂</button>
+                      <button class="sup" type="button" title="Superscript">x²</button>
+
+                      <span class="text-toolbar-divider"></span>
+
+                      <button class="left" type="button" title="Align left">←</button>
+                      <button class="centre" type="button" title="Centre">☰</button>
+                      <button class="right" type="button" title="Align right">→</button>
+                      <button class="list" type="button" title="Bullets">•</button>
+
+                      <span class="text-toolbar-divider"></span>
+
+                      <input class="colour" type="color" value="#111827" title="Text colour">
+                      <button class="symbols-toggle" type="button" title="Chemistry symbols">H₂</button>
+                      <button class="hide-tools" type="button" title="Hide toolbar">Hide tools</button>
+
+                      <div class="text-symbol-panel">
+                        ${["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉", "⁺", "⁻", "²", "³", "→", "⇌"].map(s => `<button type="button" class="sym" data-s="${s}">${s}</button>`).join("")}
+                      </div>
                     </div>
                     <div class="text-editor" contenteditable="true">${data.html || ""}</div>
                   </div>`;
+
             const ed = body.querySelector(".text-editor");
             const tools = body.querySelector(".text-tools");
+            const showToolsBtn = body.querySelector(".text-show-tools");
+            const symbolPanel = body.querySelector(".text-symbol-panel");
             let textToolsTimer = null;
 
             function showTextTools() {
@@ -2828,61 +3156,120 @@
                 clearTimeout(textToolsTimer);
             }
 
-            function hideTextToolsSoon() {
+            function hideTextToolsSoon(delay=1400) {
                 clearTimeout(textToolsTimer);
-                textToolsTimer = setTimeout(() => {
-                    item.classList.add("tools-hidden");
-                }, 1200);
+                textToolsTimer = setTimeout(() => item.classList.add("tools-hidden"), delay);
+            }
+
+            function exec(cmd, val=null) {
+                showTextTools();
+                ed.focus();
+                document.execCommand(cmd, false, val);
+                hideTextToolsSoon(1800);
             }
 
             ed.addEventListener("focus", showTextTools);
-            ed.addEventListener("pointerdown", showTextTools);
-            ed.addEventListener("input", hideTextToolsSoon);
+            ed.addEventListener("pointerdown", () => {
+                showTextTools();
+                if (!selected.has(item))
+                    selectOnly(item);
+                bringFront(item);
+            });
+            ed.addEventListener("input", () => hideTextToolsSoon(1400));
+            ed.addEventListener("blur", () => hideTextToolsSoon(500));
 
-            tools.addEventListener("pointerdown", showTextTools);
+            tools.addEventListener("pointerdown", event => {
+                event.stopPropagation();
+                showTextTools();
+            }, false);
+
+            tools.addEventListener("click", event => {
+                showTextTools();
+            }, false);
+
+            showToolsBtn.addEventListener("pointerdown", event => {
+                event.stopPropagation();
+                showTextTools();
+            }, true);
+            showToolsBtn.addEventListener("click", event => {
+                event.stopPropagation();
+                showTextTools();
+                ed.focus();
+            }, true);
+
+
+            tools.addEventListener("click", event => {
+                const btn = event.target.closest("button");
+                if (!btn)
+                    return;
+
+                event.stopPropagation();
+                showTextTools();
+
+                if (btn.classList.contains("b"))
+                    exec("bold");
+                else if (btn.classList.contains("i"))
+                    exec("italic");
+                else if (btn.classList.contains("u"))
+                    exec("underline");
+                else if (btn.classList.contains("sub")) {
+                    if (document.queryCommandState("superscript"))
+                        document.execCommand("superscript");
+                    exec("subscript");
+                }
+                else if (btn.classList.contains("sup")) {
+                    if (document.queryCommandState("subscript"))
+                        document.execCommand("subscript");
+                    exec("superscript");
+                }
+                else if (btn.classList.contains("left"))
+                    exec("justifyLeft");
+                else if (btn.classList.contains("centre"))
+                    exec("justifyCenter");
+                else if (btn.classList.contains("right"))
+                    exec("justifyRight");
+                else if (btn.classList.contains("list"))
+                    exec("insertUnorderedList");
+                else if (btn.classList.contains("symbols-toggle")) {
+                    symbolPanel.classList.toggle("open");
+                    showTextTools();
+                }
+                else if (btn.classList.contains("hide-tools")) {
+                    item.classList.add("tools-hidden");
+                }
+                else if (btn.classList.contains("sym")) {
+                    exec("insertText", btn.dataset.s);
+                }
+            });
+
             body.querySelector(".font").onchange = e => {
                 ed.style.fontFamily = e.target.value;
-                ed.focus()
+                ed.focus();
+                hideTextToolsSoon(1800);
             };
+
             body.querySelector(".size").oninput = e => {
                 ed.style.fontSize = clamp(parseInt(e.target.value) || 28, 10, 160) + "px";
-                ed.focus()
-            };
-            const exec = (cmd, val=null) => {
                 ed.focus();
-                document.execCommand(cmd, false, val)
+                hideTextToolsSoon(1800);
             };
-            body.querySelector(".b").onclick = () => exec("bold");
-            body.querySelector(".i").onclick = () => exec("italic");
-            body.querySelector(".u").onclick = () => exec("underline");
-            body.querySelector(".sub").onclick = () => {
-                if (document.queryCommandState("superscript"))
-                    exec("superscript");
-                exec("subscript")
-            };
-            body.querySelector(".sup").onclick = () => {
-                if (document.queryCommandState("subscript"))
-                    exec("subscript");
-                exec("superscript")
-            };
-            body.querySelector(".left").onclick = () => exec("justifyLeft");
-            body.querySelector(".centre").onclick = () => exec("justifyCenter");
-            body.querySelector(".right").onclick = () => exec("justifyRight");
-            body.querySelector(".list").onclick = () => exec("insertUnorderedList");
             body.querySelector(".colour").oninput = e => exec("foreColor", e.target.value);
-            body.querySelector(".trans").onclick = () => ed.style.background = ed.style.background === "transparent" ? "#fff" : "transparent";
-            body.querySelectorAll(".sym").forEach(b => b.onclick = () => exec("insertText", b.dataset.s));
+
             ed.addEventListener("keydown", e => {
                 const cmd = navigator.platform.toUpperCase().includes("MAC") ? e.metaKey : e.ctrlKey;
                 if (cmd && e.key === ",") {
                     e.preventDefault();
-                    body.querySelector(".sub").click()
+                    body.querySelector(".sub").click();
                 }
                 if (cmd && e.key === ".") {
                     e.preventDefault();
-                    body.querySelector(".sup").click()
+                    body.querySelector(".sup").click();
                 }
             });
+
+            item._cleanup = () => {
+                clearTimeout(textToolsTimer);
+            };
             item._serialize = () => ({
                 html: ed.innerHTML
             });
