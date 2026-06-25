@@ -2,8 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Whiteboard by Mr. Jansen Tan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Classroom Whiteboard Widgets v2</title>
+
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="google" content="notranslate"/>
+
     <style>
     :root {
         --bg: #f4f1ea;
@@ -2190,6 +2197,694 @@
             padding: 5px 6px !important;
             min-height: 27px !important;
         }
+    }/* FINAL UI CLEAN-UP PASS *//* Smaller empty note */
+
+    .empty-note {
+        max-width: 360px !important;
+        padding: 12px 14px !important;
+        font-size: 14px !important;
+        opacity: .78 !important;
+        border-radius: 12px !important;
+    }/* Less dominant resize handles */
+
+    .resize-dot {
+        transform: scale(.72) !important;
+        border-width: 2px !important;
+        box-shadow: 1px 1px 0 #111827 !important;
+        opacity: .92 !important;
+    }
+
+    .item.selected, .item.multi-selected {
+        outline: 2px solid rgba(37, 99, 235, .55) !important;
+        outline-offset: 2px !important;
+    }/* More menu */
+
+    .toolbar-group {
+        position: relative;
+    }
+
+    .more-menu {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        z-index: 100000;
+        display: grid;
+        gap: 7px;
+        min-width: 150px;
+        padding: 9px;
+        background: #ffffff;
+        border: 2px solid #111827;
+        border-radius: 14px;
+        box-shadow: 4px 4px 0 #111827;
+    }
+
+    .more-menu.hidden {
+        display: none !important;
+    }
+
+    .more-menu button {
+        width: 100%;
+        justify-content: center;
+        background: #ffffff !important;
+        color: #111827 !important;
+    }
+
+    .more-menu button.danger {
+        background: #dc2626 !important;
+        color: #ffffff !important;
+    }
+
+    #moreBtn {
+        background: #ffffff !important;
+        color: #111827 !important;
+    }/* Timer rebuilt responsive proportions */
+
+    .timer-widget {
+        width: 560px !important;
+        min-height: 220px !important;
+    }
+
+    .timer-widget .widget-body {
+        padding: 12px !important;
+        overflow: hidden !important;
+    }
+
+    .timer-stage {
+        display: grid !important;
+        grid-template-columns: 24% minmax(0, 60%) 16% !important;
+        gap: 8px !important;
+        align-items: center !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .timer-circle {
+        width: min(100%, 118px) !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
+        justify-self: center !important;
+        margin: 0 !important;
+    }
+
+    .timer-circle svg {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .timer-stage > div:nth-child(2) {
+        width: 100% !important;
+        justify-self: stretch !important;
+        min-width: 0 !important;
+    }
+
+    .timer-time, .timer-adjust {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) clamp(18px, 4%, 28px) minmax(0, 1fr) !important;
+        align-items: center !important;
+        justify-items: center !important;
+        column-gap: 0 !important;
+        width: 100% !important;
+    }
+
+    .timer-time .mins, .timer-time .secs, .timer-num {
+        font-size: clamp(42px, 7vw, 74px) !important;
+        line-height: .95 !important;
+        text-align: center !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .timer-time .timer-colon, .timer-colon {
+        font-size: clamp(34px, 5.5vw, 56px) !important;
+        width: auto !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    .timer-adjust .nudge, .nudge {
+        font-size: clamp(16px, 2.5vw, 22px) !important;
+        width: 26px !important;
+        height: 24px !important;
+        transform: none !important;
+    }
+
+    .timer-side {
+        display: grid !important;
+        gap: 8px !important;
+        justify-items: center !important;
+        align-content: center !important;
+        min-width: 0 !important;
+    }
+
+    .timer-side .round, .round {
+        width: clamp(34px, 4.8vw, 44px) !important;
+        height: clamp(34px, 4.8vw, 44px) !important;
+        font-size: clamp(14px, 2vw, 19px) !important;
+    }
+
+    .timer-compact .timer-stage {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto auto !important;
+        justify-items: center !important;
+    }
+
+    .timer-compact .timer-circle {
+        width: 94px !important;
+    }
+
+    .timer-compact .timer-side {
+        grid-template-columns: repeat(3, auto) !important;
+    }
+
+    @media (max-width: 640px) {
+        .timer-stage {
+            grid-template-columns: 1fr !important;
+            grid-template-rows: auto auto auto !important;
+            justify-items: center !important;
+        }
+
+        .timer-circle {
+            width: 94px !important;
+        }
+
+        .timer-side {
+            grid-template-columns: repeat(3, auto) !important;
+        }
+    }/* Wheel responsive cleanup */
+
+    .wheel-widget .widget-body {
+        overflow: hidden !important;
+    }
+
+    .wheel-body {
+        display: grid !important;
+        grid-template-columns: minmax(250px, 1fr) minmax(170px, 220px) !important;
+        gap: 10px !important;
+        height: 100% !important;
+        overflow: auto !important;
+    }
+
+    .wheel-panel {
+        align-content: start !important;
+        min-width: 0 !important;
+    }
+
+    .wheel-panel .names-box {
+        min-height: 115px !important;
+        max-height: 165px !important;
+    }
+
+    .wheel-panel button {
+        width: fit-content !important;
+        max-width: 100% !important;
+    }
+
+    .wheel-panel label {
+        line-height: 1.2 !important;
+    }
+
+    .wheel-panel label:has(.no-repeat) {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+        font-size: 13px !important;
+    }
+
+    .called-details {
+        width: 100% !important;
+        max-height: 160px !important;
+        overflow: auto !important;
+    }
+
+    .wheel-wrap {
+        width: min(100%, 390px) !important;
+    }
+
+    .wheel-settings-details {
+        width: 100%;
+    }
+
+    @media (max-width: 720px) {
+        .wheel-body {
+            grid-template-columns: 1fr !important;
+        }
+
+        .wheel-panel {
+            order: 2;
+        }
+
+        .wheel-panel .names-box {
+            max-height: 120px !important;
+        }
+    }/* Toolbar simplification */
+
+    .toolbar {
+        gap: 7px !important;
+    }
+
+    .toolbar-group:not(.widget-buttons) {
+        gap: 5px !important;
+    }
+
+    #classSelect {
+        max-width: 95px !important;
+    }/* PHASE 1 RESPONSIVE APP SHELL */
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden !important;
+        overscroll-behavior: none;
+        touch-action: none;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    .app {
+        width: 100dvw !important;
+        height: 100dvh !important;
+        display: block !important;
+        overflow: hidden !important;
+    }
+
+    .board-wrap {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100dvw !important;
+        height: 100dvh !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        z-index: 1;
+    }
+
+    #whiteboard {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100dvw !important;
+        height: 100dvh !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        overflow: hidden !important;
+        touch-action: none;
+    }
+
+    #whiteboard::before {
+        background-size: 32px 32px !important;
+    }
+
+    #drawCanvas {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 20 !important;
+    }
+
+    #objectLayer {
+        position: absolute;
+        inset: 0;
+        z-index: 30;
+        pointer-events: none;
+        touch-action: none;
+    }
+
+    #objectLayer .item {
+        pointer-events: auto;
+    }
+
+    .selection-marquee, .sel-box {
+        z-index: 1000 !important;
+    }
+
+    .toolbar {
+        position: fixed !important;
+        left: 50% !important;
+        bottom: max(12px, env(safe-area-inset-bottom)) !important;
+        top: auto !important;
+        transform: translateX(-50%) !important;
+        width: auto !important;
+        max-width: calc(100dvw - 24px) !important;
+        padding: 7px 8px !important;
+        margin: 0 !important;
+        background: rgba(255, 255, 255, .95) !important;
+        border: 2px solid #111827 !important;
+        border-radius: 18px !important;
+        box-shadow: 4px 4px 0 #111827, 0 8px 24px rgba(15, 23, 42, .18) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        z-index: 10000 !important;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .toolbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .toolbar-group.widget-buttons {
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        gap: 5px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    .toolbar-group:not(.widget-buttons) {
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        gap: 5px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .toolbar button, .toolbar .file-btn, .toolbar select {
+        font-size: clamp(11px, 1.25dvw, 14px) !important;
+        line-height: 1 !important;
+        min-height: clamp(28px, 3.2dvw, 36px) !important;
+        padding: clamp(5px, .65dvw, 8px) clamp(7px, .9dvw, 11px) !important;
+        border-radius: 10px !important;
+        white-space: nowrap !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+    }
+
+    .toolbar-group.widget-buttons .widget-btn, .toolbar-group.widget-buttons .file-btn.widget-btn {
+        background: #f97316 !important;
+        color: #ffffff !important;
+    }
+
+    .toolbar-group.widget-buttons .widget-btn:hover, .toolbar-group.widget-buttons .file-btn.widget-btn:hover {
+        background: #ea580c !important;
+    }
+
+    #moreBtn {
+        background: #ffffff !important;
+        color: #111827 !important;
+    }
+
+    .more-menu {
+        position: fixed !important;
+        right: max(12px, env(safe-area-inset-right)) !important;
+        bottom: calc(max(12px, env(safe-area-inset-bottom)) + 62px) !important;
+        top: auto !important;
+        z-index: 10001 !important;
+        min-width: 170px !important;
+        padding: 10px !important;
+        background: #ffffff !important;
+        border: 2px solid #111827 !important;
+        border-radius: 16px !important;
+        box-shadow: 4px 4px 0 #111827 !important;
+        display: grid !important;
+        gap: 8px !important;
+    }
+
+    .more-menu.hidden {
+        display: none !important;
+    }
+
+    .more-menu button, .more-menu .file-btn, .more-menu select {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        border: 2px solid #111827 !important;
+        border-radius: 999px !important;
+        padding: 7px 10px !important;
+        font-size: 13px !important;
+        font-weight: 850 !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+    }
+
+    .more-menu button.danger {
+        background: #dc2626 !important;
+        color: #ffffff !important;
+    }
+
+    .show-toolbar-fab {
+        position: fixed !important;
+        left: max(12px, env(safe-area-inset-left)) !important;
+        bottom: max(12px, env(safe-area-inset-bottom)) !important;
+        top: auto !important;
+        z-index: 10002 !important;
+        background: #f97316 !important;
+        color: #ffffff !important;
+    }
+
+    body.toolbar-collapsed .toolbar {
+        display: none !important;
+    }
+
+    .empty-note {
+        top: 22px !important;
+        left: 22px !important;
+    }
+
+    @media (max-width: 900px) {
+        .toolbar {
+            left: max(8px, env(safe-area-inset-left)) !important;
+            right: max(8px, env(safe-area-inset-right)) !important;
+            transform: none !important;
+            max-width: none !important;
+            justify-content: flex-start !important;
+            border-radius: 16px !important;
+            padding: 6px !important;
+        }
+
+        .toolbar button, .toolbar .file-btn, .toolbar select {
+            font-size: 10.5px !important;
+            min-height: 28px !important;
+            padding: 5px 7px !important;
+        }
+
+        #status {
+            display: none !important;
+        }
+    }/* FINAL COMPACT ICON ACTIONS */
+
+    #status {
+        display: none !important;
+    }
+
+    .compact-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        flex-wrap: nowrap !important;
+        border-left: 2px solid rgba(17, 24, 39, .18) !important;
+        padding-left: 7px !important;
+        margin-left: 2px !important;
+    }
+
+    .icon-action {
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        min-height: 30px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 2px solid #111827 !important;
+        border-radius: 10px !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+        font-size: 14px !important;
+        line-height: 1 !important;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+    }
+
+    .icon-action:hover {
+        background: #fff7ed !important;
+    }
+
+    .icon-action.danger {
+        background: #fee2e2 !important;
+        color: #991b1b !important;
+    }
+
+    .compact-class {
+        width: 72px !important;
+        min-width: 72px !important;
+        height: 30px !important;
+        min-height: 30px !important;
+        padding: 0 6px !important;
+        border: 2px solid #111827 !important;
+        border-radius: 10px !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+        font-size: 11px !important;
+        font-weight: 850 !important;
+    }
+
+    #classFolderInput, #layoutInput {
+        display: none !important;
+    }
+
+    @media (max-width: 900px) {
+        .compact-actions {
+            gap: 3px !important;
+            padding-left: 5px !important;
+        }
+
+        .icon-action {
+            width: 28px !important;
+            height: 28px !important;
+            min-width: 28px !important;
+            min-height: 28px !important;
+            font-size: 13px !important;
+            border-radius: 9px !important;
+        }
+
+        .compact-class {
+            width: 63px !important;
+            min-width: 63px !important;
+            height: 28px !important;
+            min-height: 28px !important;
+            font-size: 10px !important;
+        }
+    }
+
+    @media (max-width: 680px) {
+        .toolbar {
+            gap: 4px !important;
+            padding: 5px !important;
+        }
+
+        .toolbar-group.widget-buttons .widget-btn, .toolbar-group.widget-buttons .file-btn.widget-btn {
+            padding-left: 6px !important;
+            padding-right: 6px !important;
+        }
+
+        .compact-class {
+            width: 58px !important;
+            min-width: 58px !important;
+        }
+    }/* FINAL WIDGET BUTTON CLICK FIX */
+
+    .toolbar {
+        pointer-events: auto !important;
+        z-index: 2147483000 !important;
+    }
+
+    .toolbar button, .toolbar label, .toolbar select, .toolbar input, .widget-btn, .file-btn.widget-btn, .icon-action, .compact-class {
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
+    }
+
+    #objectLayer {
+        pointer-events: none !important;
+    }
+
+    #objectLayer .item {
+        pointer-events: auto !important;
+    }
+
+    #drawCanvas {
+        pointer-events: none !important;
+    }
+
+    body.draw-mode #drawCanvas {
+        pointer-events: auto !important;
+    }/* FINAL DIRECT WIDGET BUTTON FIX */
+
+    .toolbar {
+        z-index: 2147483600 !important;
+        pointer-events: auto !important;
+    }
+
+    .toolbar-group.widget-buttons {
+        position: relative !important;
+        z-index: 2147483610 !important;
+        pointer-events: auto !important;
+    }
+
+    .widget-btn[data-widget] {
+        position: relative !important;
+        z-index: 2147483620 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+    }
+
+    #drawCanvas {
+        pointer-events: none !important;
+    }
+
+    body.draw-mode #drawCanvas {
+        pointer-events: auto !important;
+    }
+
+    #objectLayer {
+        pointer-events: none !important;
+    }
+
+    #objectLayer .item {
+        pointer-events: auto !important;
+    }
+
+    #status {
+        display: none !important;
+    }/* FINAL RESTORE WIDGET CREATION FIX */
+
+    .toolbar, .toolbar * {
+        pointer-events: auto !important;
+    }
+
+    .widget-btn[data-widget] {
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        position: relative !important;
+        z-index: 2147483640 !important;
+    }
+
+    #objectLayer {
+        pointer-events: none !important;
+    }
+
+    #objectLayer .item {
+        pointer-events: auto !important;
+    }
+
+    #status {
+        display: none !important;
+    }/* FINAL PLAIN INLINE WIDGET BUTTONS */
+
+    .toolbar {
+        pointer-events: auto !important;
+        z-index: 2147483600 !important;
+    }
+
+    .toolbar-group.widget-buttons, .toolbar-group.widget-buttons * {
+        pointer-events: auto !important;
+    }
+
+    .widget-btn[data-widget] {
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        position: relative !important;
+        z-index: 2147483640 !important;
+    }
+
+    #status {
+        display: none !important;
     }
     </style>
 </head>
@@ -2197,84 +2892,80 @@
     <div class="app">
         <header class="toolbar">
             <div class="toolbar-group widget-buttons" aria-label="Widgets">
-                <button class="widget-btn" data-widget="text" type="button">Text</button>
-                <button class="widget-btn" data-widget="timer" type="button">Timer</button>
-                <button class="widget-btn" data-widget="clock" type="button">Clock</button>
-                <button class="widget-btn" data-widget="exam" type="button">Exam Mode</button>
-                <button class="widget-btn" data-widget="group" type="button">Group Maker</button>
-                <button class="widget-btn" data-widget="wheel" type="button">Wheel of Names</button>
+                <button class="widget-btn" data-widget="text" type="button" onclick="event.preventDefault(); event.stopPropagation(); addText();">Text</button>
+                <button class="widget-btn" data-widget="timer" type="button" onclick="event.preventDefault(); event.stopPropagation(); addTimer();">Timer</button>
+                <button class="widget-btn" data-widget="clock" type="button" onclick="event.preventDefault(); event.stopPropagation(); addClock();">Clock</button>
+                <button class="widget-btn" data-widget="exam" type="button" onclick="event.preventDefault(); event.stopPropagation(); addExam();">Exam Mode</button>
+                <button class="widget-btn" data-widget="group" type="button" onclick="event.preventDefault(); event.stopPropagation(); addGroupMaker();">Group Maker</button>
+                <button class="widget-btn" data-widget="wheel" type="button" onclick="event.preventDefault(); event.stopPropagation(); addWheel();">Wheel of Names</button>
                 <label for="fileInput" class="file-btn widget-btn picture-btn">Picture</label>
                 <input id="fileInput" type="file" accept="image/*" multiple>
                 <button id="drawBtn" class="widget-btn" type="button">Draw</button>
             </div>
 
-            <div class="toolbar-group">
-                <label for="classFolderInput" class="file-btn">Class lists</label>
+            <div class="toolbar-group compact-actions" aria-label="Actions">
+                <label for="classFolderInput" class="icon-action" title="Class lists">📁</label>
                 <input id="classFolderInput" type="file" accept=".txt,text/plain" webkitdirectory directory multiple>
-                <select id="classSelect">
-                    <option value="">No class loaded</option>
+                <select id="classSelect" class="compact-class" title="Class">
+                    <option value="">Class</option>
                 </select>
-            </div>
-
-            <div class="toolbar-group">
-                <button id="saveBtn" type="button">Save</button>
-                <button id="loadBtn" type="button">Load</button>
+                <button id="saveBtn" class="icon-action" type="button" title="Save layout">💾</button>
+                <button id="loadBtn" class="icon-action" type="button" title="Load layout">📂</button>
+                <button id="hideToolbarBtn" class="icon-action" type="button" title="Hide bar">👁</button>
+                <button id="clearBtn" class="icon-action danger" type="button" title="Clear board">🗑</button>
                 <input id="layoutInput" type="file" accept=".json,application/json">
-                <button id="hideToolbarBtn" type="button">Hide bar</button>
-                <button id="clearBtn" class="danger" type="button">Clear</button>
             </div>
 
-            <span id="status" class="toolbar-note">0 items</span>
-        </header>
+    </div>
 
-        <main class="board-wrap" id="boardWrap">
-            <section id="whiteboard">
-                <canvas id="drawCanvas">
-                </canvas>
-                <div id="drawToolbar" class="draw-toolbar hidden">
-                    <button class="draw-tool active" data-tool="select" type="button" title="Select / move">↖</button>
-                    <button class="draw-tool" data-tool="pen" type="button" title="Pen">✎</button>
-                    <button class="draw-tool" data-tool="highlighter" type="button" title="Highlighter">▰</button>
-                    <button class="draw-tool" data-tool="eraser" type="button" title="Eraser">⌫</button>
+    <span id="status" class="toolbar-note"></span>
+    </header>
 
-                    <span class="draw-divider"></span>
+    <main class="board-wrap" id="boardWrap">
+        <section id="whiteboard">
+            <canvas id="drawCanvas">
+            </canvas>
+            <div id="objectLayer"></div>
+            <div id="drawToolbar" class="draw-toolbar hidden">
+                <button class="draw-tool active" data-tool="select" type="button" title="Select / move">↖</button>
+                <button class="draw-tool" data-tool="pen" type="button" title="Pen">✎</button>
+                <button class="draw-tool" data-tool="highlighter" type="button" title="Highlighter">▰</button>
+                <button class="draw-tool" data-tool="eraser" type="button" title="Eraser">⌫</button>
 
-                    <button class="draw-colour active" data-colour="#111827" style="background:#111827" title="Black"></button>
-                    <button class="draw-colour" data-colour="#ef4444" style="background:#ef4444" title="Red"></button>
-                    <button class="draw-colour" data-colour="#f97316" style="background:#f97316" title="Orange"></button>
-                    <button class="draw-colour" data-colour="#fbbf24" style="background:#fbbf24" title="Yellow"></button>
-                    <button class="draw-colour" data-colour="#22c55e" style="background:#22c55e" title="Green"></button>
-                    <button class="draw-colour" data-colour="#3b82f6" style="background:#3b82f6" title="Blue"></button>
-                    <button class="draw-colour" data-colour="#8b5cf6" style="background:#8b5cf6" title="Purple"></button>
-                    <button class="draw-colour" data-colour="#ec4899" style="background:#ec4899" title="Pink"></button>
+                <span class="draw-divider"></span>
 
-                    <span class="draw-divider"></span>
+                <button class="draw-colour active" data-colour="#111827" style="background:#111827" title="Black"></button>
+                <button class="draw-colour" data-colour="#ef4444" style="background:#ef4444" title="Red"></button>
+                <button class="draw-colour" data-colour="#f97316" style="background:#f97316" title="Orange"></button>
+                <button class="draw-colour" data-colour="#fbbf24" style="background:#fbbf24" title="Yellow"></button>
+                <button class="draw-colour" data-colour="#22c55e" style="background:#22c55e" title="Green"></button>
+                <button class="draw-colour" data-colour="#3b82f6" style="background:#3b82f6" title="Blue"></button>
+                <button class="draw-colour" data-colour="#8b5cf6" style="background:#8b5cf6" title="Purple"></button>
+                <button class="draw-colour" data-colour="#ec4899" style="background:#ec4899" title="Pink"></button>
 
-                    <button class="draw-size active" data-size="4" type="button">
-                        <span style="width:6px;height:6px"></span>
-                    </button>
-                    <button class="draw-size" data-size="9" type="button">
-                        <span style="width:12px;height:12px"></span>
-                    </button>
-                    <button class="draw-size" data-size="18" type="button">
-                        <span style="width:20px;height:20px"></span>
-                    </button>
+                <span class="draw-divider"></span>
 
-                    <span class="draw-divider"></span>
+                <button class="draw-size active" data-size="4" type="button">
+                    <span style="width:6px;height:6px"></span>
+                </button>
+                <button class="draw-size" data-size="9" type="button">
+                    <span style="width:12px;height:12px"></span>
+                </button>
+                <button class="draw-size" data-size="18" type="button">
+                    <span style="width:20px;height:20px"></span>
+                </button>
 
-                    <button id="clearDrawingBtn" class="draw-action" type="button">Clear drawing</button>
-                    <button id="closeDrawBtn" class="draw-action" type="button">Close</button>
-                </div>
+                <span class="draw-divider"></span>
 
-                <div class="empty-note" id="emptyNote">
-                    <strong>Start with Add widget or Picture.</strong>
-                    <br>
+                <button id="clearDrawingBtn" class="draw-action" type="button">Clear drawing</button>
+                <button id="closeDrawBtn" class="draw-action" type="button">Close</button>
+            </div>
 
-                            Drag widget headers to move them. Resize from any edge or corner. Use Shift-click or drag-select to select multiple items.
-                          
-                </div>
-            </section>
-        </main>
+            <div class="empty-note" id="emptyNote">
+                <strong>Add a widget or picture to begin.</strong>
+            </div>
+        </section>
+    </main>
     </div>
 
     <div id="wheelWinnerPopup" class="wheel-winner-popup">
@@ -2322,6 +3013,7 @@
     <script>
     (() => {
         const board = document.getElementById("whiteboard");
+        const objectLayer = document.getElementById("objectLayer");
         const boardWrap = document.getElementById("boardWrap");
         const emptyNote = document.getElementById("emptyNote");
         const status = document.getElementById("status");
@@ -2456,6 +3148,14 @@
         }
 
 
+
+        window.addText = addText;
+        window.addTimer = addTimer;
+        window.addClock = addClock;
+        window.addExam = addExam;
+        window.addGroupMaker = addGroupMaker;
+        window.addWheel = addWheel;
+
         const widgetFactories = {
             text: addText,
             timer: addTimer,
@@ -2463,6 +3163,16 @@
             exam: addExam,
             group: addGroupMaker,
             wheel: addWheel
+        };
+
+        window.openWhiteboardWidget = function(type, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            const factory = widgetFactories[type];
+            if (factory)
+                factory();
         };
 
         function showToast(msg) {
@@ -2497,7 +3207,7 @@
         }
 
         function clampAllItemsIntoView() {
-            board.querySelectorAll(".item").forEach(item => {
+            objectLayer.querySelectorAll(".item").forEach(item => {
                 const w = item.offsetWidth;
                 const h = item.offsetHeight;
                 const x = parseFloat(item.style.left) || 0;
@@ -2508,12 +3218,13 @@
         }
 
         function updateStatus() {
-            const count = board.querySelectorAll(".item").length;
-            status.textContent = `${count} item${count === 1 ? "" : "s"}`;
-            emptyNote.style.display = count ? "none" : "block";
+            emptyNote.classList.toggle("hidden", objectLayer.querySelectorAll(".item").length > 0);
         }
+
+
+
         function selectedItems() {
-            return [...selected].filter(el => el.isConnected);
+            return [...selected].filter(el => el.isConnected !== false);
         }
         function clearSelection() {
             selected.forEach(el => el.classList.remove("selected", "multi-selected"));
@@ -2572,7 +3283,8 @@
                             h: item.offsetHeight
                         }))
                     };
-                    d.setPointerCapture(e.pointerId);
+                    if (d.setPointerCapture)
+                        d.setPointerCapture(e.pointerId);
                 });
             });
         }
@@ -2605,7 +3317,7 @@
                   <div class="widget-body"></div>
                 `;
             addHandles(item);
-            board.appendChild(item);
+            (objectLayer || board).appendChild(item);
 
             const header = item.querySelector(".widget-header");
             const body = item.querySelector(".widget-body");
@@ -2687,7 +3399,7 @@
                 item.classList.add("locked");
             item.innerHTML = `<img src="${src}" alt="Picture"><button class="picture-delete-btn" type="button" title="Delete picture">×</button>`;
             addHandles(item);
-            board.appendChild(item);
+            (objectLayer || board).appendChild(item);
 
             const pictureDeleteBtn = item.querySelector(".picture-delete-btn");
 
@@ -2844,7 +3556,7 @@
                     r: left + w,
                     b: top + h
                 };
-                board.querySelectorAll(".item").forEach(i => {
+                objectLayer.querySelectorAll(".item").forEach(i => {
                     const x = parseFloat(i.style.left) || 0,
                         y = parseFloat(i.style.top) || 0,
                         rr = {
@@ -2916,7 +3628,7 @@
             classSelect.innerHTML = "";
             const keys = Object.keys(classLists).sort();
             if (!keys.length) {
-                classSelect.innerHTML = '<option value="">No class loaded</option>';
+                classSelect.innerHTML = '<option value="">Class</option>';
                 return;
             }
             keys.forEach(k => {
@@ -3698,7 +4410,16 @@
             body.innerHTML = `
                   <div class="wheel-body">
                     <div class="wheel-stage"><div class="wheel-wrap"><div class="wheel-pointer"></div><canvas class="wheel-canvas"></canvas><div class="wheel-hub">SPIN</div><div class="confetti"></div></div><button class="primary spin">Spin wheel</button><div class="card" style="width:100%;text-align:center"><div class="card-title">Selected name</div><div class="card-value result" style="font-size:24px">None yet</div></div><details class="called-details" open><summary>Called names</summary><div class="called-box"><div class="called-list muted">No one called yet</div><button class="small clear-called">Clear called</button></div></details><button class="danger remove-winner">Remove from wheel</button></div>
-                    <div class="wheel-panel"><label class="field">Names<textarea class="names-box">${data.names || "Ali\nBala\nChandra\nDina\nEthan\nFarah"}</textarea></label><button class="small load-class">Load selected class</button><button class="small update">Update wheel</button><button class="small reset-wheel">Reset original class</button><label><input class="no-repeat" type="checkbox" ${data.noRepeat ? "checked" : ""}> do not repeat until all called</label></div>
+                    <details class="wheel-panel wheel-settings-details">
+                      <summary>Names / Settings</summary>
+                      <label class="field">Names<textarea class="names-box">${data.names || "Ali\nBala\nChandra\nDina\nEthan\nFarah"}</textarea></label>
+                      <div class="row">
+                        <button class="small load-class" type="button">Load selected class</button>
+                        <button class="small update" type="button">Update wheel</button>
+                        <button class="small reset-wheel" type="button">Reset original class</button>
+                      </div>
+                      <label style="display:flex;align-items:flex-start;gap:6px;"><input class="no-repeat" type="checkbox" ${data.noRepeat ? "checked" : ""}> <span>do not repeat until all called</span></label>
+                    </details>
                   </div>`;
             const canvas = body.querySelector(".wheel-canvas"),
                 ctx = canvas.getContext("2d"),
@@ -3938,7 +4659,7 @@
             const data = {
                 version: 2,
                 created: new Date().toISOString(),
-                items: [...board.querySelectorAll(".item")].map(serializeItem),
+                items: [...objectLayer.querySelectorAll(".item")].map(serializeItem),
                 classLists,
                 drawing: drawCanvas.toDataURL("image/png")
             };
@@ -3956,7 +4677,7 @@
             showToast("Layout saved");
         }
         function loadLayout(data) {
-            board.querySelectorAll(".item").forEach(i => {
+            objectLayer.querySelectorAll(".item").forEach(i => {
                 if (i._cleanup)
                     i._cleanup();
                 i.remove()
@@ -4024,6 +4745,12 @@
         });
 
 
+
+
+
+
+
+
         hideToolbarBtn.onclick = () => {
             document.body.classList.add("toolbar-collapsed");
             showToolbarBtn.classList.remove("hidden");
@@ -4035,9 +4762,6 @@
         };
 
 
-        widgetButtons.forEach(btn => {
-            btn.addEventListener("click", () => widgetFactories[btn.dataset.widget]?.());
-        });
         fileInput.onchange = e => {
             [...e.target.files].filter(f => f.type.startsWith("image/")).forEach((f, i) => {
                 const r = new FileReader();
@@ -4052,7 +4776,7 @@
         };
         clearBtn.onclick = () => {
             if (confirm("Clear the whole board?")) {
-                board.querySelectorAll(".item").forEach(i => {
+                objectLayer.querySelectorAll(".item").forEach(i => {
                     if (i._cleanup)
                         i._cleanup();
                     i.remove()
