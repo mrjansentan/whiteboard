@@ -2885,6 +2885,1048 @@
 
     #status {
         display: none !important;
+    }/* V5 REBUILD CONSOLIDATED UX LAYER */
+
+    #status {
+        display: none !important;
+    }
+
+    #whiteboard[data-bg="grid"] {
+        background:
+        linear-gradient(#fff 0 0) padding-box, linear-gradient(135deg, #f97316, #111827) border-box !important;
+    }
+
+    #whiteboard[data-bg="plain"] {
+        background: #ffffff !important;
+    }
+
+    #whiteboard[data-bg="dark"] {
+        background: #111827 !important;
+    }
+
+    #whiteboard[data-bg="green"] {
+        background: #14532d !important;
+    }
+
+    #whiteboard[data-bg="dots"] {
+        background-color: #ffffff !important;
+        background-image: radial-gradient(rgba(17, 24, 39, .16) 1px, transparent 1px) !important;
+        background-size: 18px 18px !important;
+    }
+
+    #whiteboard[data-bg="plain"]::before, #whiteboard[data-bg="dark"]::before, #whiteboard[data-bg="green"]::before, #whiteboard[data-bg="dots"]::before {
+        opacity: 0 !important;
+    }
+
+    .bg-panel {
+        position: fixed;
+        right: max(12px, env(safe-area-inset-right));
+        bottom: calc(max(12px, env(safe-area-inset-bottom)) + 64px);
+        z-index: 100020;
+        display: grid;
+        gap: 8px;
+        width: 160px;
+        padding: 10px;
+        background: #ffffff;
+        border: 2px solid #111827;
+        border-radius: 16px;
+        box-shadow: 4px 4px 0 #111827;
+    }
+
+    .bg-panel.hidden {
+        display: none !important;
+    }
+
+    .bg-panel button {
+        border: 2px solid #111827;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #111827;
+        padding: 7px 10px;
+        font-weight: 900;
+        box-shadow: 2px 2px 0 #111827;
+    }
+
+    .widget {
+        overflow: visible !important;
+        background: #ffffff !important;
+        border: 2px solid #111827 !important;
+        border-radius: 14px !important;
+        box-shadow: 4px 4px 0 #111827 !important;
+    }
+
+    .widget-header {
+        height: 28px !important;
+        min-height: 28px !important;
+        padding: 4px 8px !important;
+        background: #f8fafc !important;
+        border-bottom: 2px solid #111827 !important;
+        border-radius: 12px 12px 0 0 !important;
+        cursor: grab !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .widget-header:active {
+        cursor: grabbing !important;
+    }
+
+    .widget-title {
+        display: block !important;
+        font-size: 13px !important;
+        font-weight: 950 !important;
+        line-height: 1 !important;
+        margin-right: auto !important;
+    }
+
+    .drag-hint, .lock-btn, .dup-btn {
+        display: none !important;
+    }
+
+    .close-btn {
+        display: none !important;
+        width: 24px !important;
+        height: 24px !important;
+        min-width: 24px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 13px !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        border: 2px solid #111827 !important;
+        box-shadow: 1px 1px 0 #111827 !important;
+    }
+
+    .item.selected .close-btn, .item.multi-selected .close-btn {
+        display: grid !important;
+    }
+
+    .widget-body {
+        height: calc(100% - 28px) !important;
+        min-height: 0 !important;
+        overflow: auto !important;
+        padding: 10px !important;
+        border-radius: 0 0 12px 12px !important;
+    }
+
+    .item > .resize-dot {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    .item.selected > .resize-dot, .item.multi-selected > .resize-dot {
+        display: block !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        background: #ffffff !important;
+        border: 2px solid #111827 !important;
+        box-shadow: 1px 1px 0 #111827 !important;
+    }
+
+    .compact-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        flex-wrap: nowrap !important;
+        border-left: 2px solid rgba(17, 24, 39, .18) !important;
+        padding-left: 7px !important;
+        margin-left: 2px !important;
+    }
+
+    .icon-action {
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        min-height: 30px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 2px solid #111827 !important;
+        border-radius: 10px !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+        font-size: 14px !important;
+    }
+
+    .icon-action.danger {
+        background: #fee2e2 !important;
+        color: #991b1b !important;
+    }
+
+    .compact-class {
+        width: 72px !important;
+        min-width: 72px !important;
+        height: 30px !important;
+        min-height: 30px !important;
+        padding: 0 6px !important;
+        border: 2px solid #111827 !important;
+        border-radius: 10px !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+        font-size: 11px !important;
+        font-weight: 850 !important;
+    }/* Restore Exam AA layout clearly */
+
+    .exam-widget .exam-summary {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+    }
+
+    .exam-widget .exam-subject {
+        grid-column: 1 / -1 !important;
+    }
+
+    .exam-widget .aa-toggle {
+        margin-top: 8px !important;
+    }
+
+    .exam-widget .row[style * ="justify-content:center"] {
+        margin-top: 8px !important;
+    }
+
+    @media (max-width: 700px) {
+        .toolbar {
+            left: 8px !important;
+            right: 8px !important;
+            bottom: max(8px, env(safe-area-inset-bottom)) !important;
+            transform: none !important;
+            max-width: none !important;
+            justify-content: flex-start !important;
+            padding: 6px !important;
+            gap: 5px !important;
+            border-radius: 18px !important;
+        }
+
+        .toolbar-group.widget-buttons {
+            gap: 5px !important;
+            flex-wrap: nowrap !important;
+        }
+
+        .toolbar-group.widget-buttons .widget-btn, .toolbar-group.widget-buttons .file-btn.widget-btn {
+            min-height: 32px !important;
+            padding: 6px 9px !important;
+            font-size: 12px !important;
+            border-radius: 12px !important;
+            white-space: nowrap !important;
+        }
+
+        .toolbar-group.widget-buttons .widget-btn[data-widget="exam"] {
+            font-size: 0 !important;
+        }
+
+        .toolbar-group.widget-buttons .widget-btn[data-widget="exam"]::after {
+            content: "Exam";
+            font-size: 12px;
+        }
+
+        .toolbar-group.widget-buttons .widget-btn[data-widget="group"] {
+            font-size: 0 !important;
+        }
+
+        .toolbar-group.widget-buttons .widget-btn[data-widget="group"]::after {
+            content: "Groups";
+            font-size: 12px;
+        }
+
+        .toolbar-group.widget-buttons .widget-btn[data-widget="wheel"] {
+            font-size: 0 !important;
+        }
+
+        .toolbar-group.widget-buttons .widget-btn[data-widget="wheel"]::after {
+            content: "Wheel";
+            font-size: 12px;
+        }
+
+        .widget-header {
+            height: 24px !important;
+            min-height: 24px !important;
+            padding: 3px 6px !important;
+        }
+
+        .widget-title {
+            font-size: 12px !important;
+        }
+
+        .widget-body {
+            height: calc(100% - 24px) !important;
+            padding: 7px !important;
+        }
+
+        .close-btn {
+            width: 22px !important;
+            height: 22px !important;
+            min-width: 22px !important;
+            font-size: 12px !important;
+        }
+
+        .item {
+            max-width: calc(100dvw - 24px) !important;
+            max-height: calc(100dvh - 138px) !important;
+        }
+
+        .timer-widget {
+            width: min(360px, calc(100dvw - 24px)) !important;
+            height: 170px !important;
+            min-height: 170px !important;
+        }
+
+        .timer-stage {
+            grid-template-columns: 22% minmax(0, 60%) 18% !important;
+            gap: 4px !important;
+        }
+
+        .timer-circle {
+            width: 62px !important;
+            height: 62px !important;
+        }
+
+        .timer-circle svg {
+            width: 62px !important;
+            height: 62px !important;
+        }
+
+        .timer-time .mins, .timer-time .secs, .timer-num {
+            font-size: clamp(30px, 10vw, 44px) !important;
+        }
+
+        .clock-widget {
+            width: min(320px, calc(100dvw - 24px)) !important;
+            min-height: 180px !important;
+        }
+
+        .clock-digital {
+            font-size: clamp(32px, 13vw, 54px) !important;
+        }
+
+        .text-widget {
+            width: min(340px, calc(100dvw - 24px)) !important;
+            min-height: 240px !important;
+        }
+
+        .text-widget .text-editor {
+            font-size: 18px !important;
+            min-height: 120px !important;
+        }
+
+        .exam-widget, .group-widget, .wheel-widget {
+            width: min(360px, calc(100dvw - 24px)) !important;
+            min-height: min(470px, calc(100dvh - 154px)) !important;
+        }
+
+        .exam-widget .exam-summary {
+            grid-template-columns: 1fr !important;
+        }
+
+        .wheel-body {
+            grid-template-columns: 1fr !important;
+        }
+    }/* TIMER SETTINGS VISIBILITY FIX */
+
+    .timer-widget .widget-body {
+        position: relative !important;
+        overflow: visible !important;
+    }
+
+    .timer-widget .timer-stage {
+        transition: transform .15s ease, opacity .15s ease;
+    }
+
+    .timer-widget.timer-settings-open .timer-stage {
+        transform: translateY(-10px) scale(.94);
+        transform-origin: center center;
+    }
+
+    .timer-widget .timer-settings {
+        position: absolute !important;
+        left: 14px !important;
+        right: 14px !important;
+        bottom: 14px !important;
+        z-index: 80 !important;
+        max-height: min(170px, calc(100% - 28px)) !important;
+        overflow: auto !important;
+        background: #ffffff !important;
+        border: 2px solid #111827 !important;
+        border-radius: 14px !important;
+        box-shadow: 4px 4px 0 #111827 !important;
+        padding: 10px !important;
+    }
+
+    .timer-widget .timer-settings.hidden {
+        display: none !important;
+    }
+
+    .timer-widget .timer-settings summary {
+        font-weight: 950 !important;
+        cursor: pointer !important;
+        margin-bottom: 8px !important;
+    }
+
+    .timer-widget .timer-settings .row {
+        gap: 8px !important;
+        margin-top: 8px !important;
+    }
+
+    .timer-widget .timer-settings .field {
+        min-width: 130px !important;
+    }
+
+    .timer-widget .timer-settings input[type="number"] {
+        width: 80px !important;
+    }
+
+    @media (max-width: 700px) {
+        .timer-widget.timer-settings-open .timer-stage {
+            transform: translateY(-6px) scale(.9);
+        }
+
+        .timer-widget .timer-settings {
+            left: 8px !important;
+            right: 8px !important;
+            bottom: 8px !important;
+            max-height: 120px !important;
+            padding: 8px !important;
+            font-size: 11px !important;
+        }
+
+        .timer-widget .timer-settings .row {
+            gap: 5px !important;
+            margin-top: 5px !important;
+        }
+
+        .timer-widget .timer-settings button.small {
+            padding: 3px 6px !important;
+            font-size: 10px !important;
+        }
+    }/* RESPONSIVE CLOCK DISPLAY MODES */
+
+    .clock-widget .widget-body {
+        overflow: hidden !important;
+        container-type: size;
+    }
+
+    .clock-widget .clock-shell {
+        height: 100%;
+        width: 100%;
+        min-height: 0;
+        display: grid;
+        gap: 10px;
+    }
+
+    .clock-widget .clock-analog-panel, .clock-widget .clock-digital-panel {
+        min-height: 0;
+        display: grid;
+        place-items: center;
+    }
+
+    .clock-widget .analog {
+        position: relative !important;
+        width: min(100%, 320px) !important;
+        aspect-ratio: 1 / 1 !important;
+        border: 6px solid #6366f1 !important;
+        border-radius: 50% !important;
+        background: #ffffff !important;
+        box-shadow: none !important;
+        overflow: hidden !important;
+    }
+
+    .clock-widget .analog::after {
+        display: none !important;
+    }
+
+    .clock-widget .tick-layer span {
+        display: none !important;
+    }
+
+    .clock-widget .tick-layer {
+        position: absolute !important;
+        inset: 7px !important;
+        border-radius: 50% !important;
+        pointer-events: none !important;
+        background:
+        repeating-conic-gradient( from 0deg, #818cf8 0deg 1.4deg, transparent 1.4deg 6deg
+        ) !important;
+        -webkit-mask: radial-gradient(circle, transparent 0 83%, #000 84% 100%);
+        mask: radial-gradient(circle, transparent 0 83%, #000 84% 100%);
+    }
+
+    .clock-widget .tick-layer::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background:
+        repeating-conic-gradient( from 0deg, #6366f1 0deg 2.6deg, transparent 2.6deg 30deg
+        );
+        -webkit-mask: radial-gradient(circle, transparent 0 78%, #000 79% 100%);
+        mask: radial-gradient(circle, transparent 0 78%, #000 79% 100%);
+    }
+
+    .clock-widget .clock-number {
+        position: absolute !important;
+        transform: translate(-50%, -50%) !important;
+        font-size: clamp(14px, 6.4cqw, 30px) !important;
+        font-weight: 850 !important;
+        color: #111827 !important;
+        line-height: 1 !important;
+        z-index: 3 !important;
+    }
+
+    .clock-widget .hand {
+        position: absolute !important;
+        left: 50% !important;
+        bottom: 50% !important;
+        transform-origin: bottom center !important;
+        border-radius: 999px !important;
+        background: #111827 !important;
+        z-index: 4 !important;
+    }
+
+    .clock-widget .hour {
+        width: 5px !important;
+        height: 28% !important;
+    }
+
+    .clock-widget .minute {
+        width: 4px !important;
+        height: 39% !important;
+    }
+
+    .clock-widget .second {
+        width: 2px !important;
+        height: 41% !important;
+        background: #ef4444 !important;
+    }
+
+    .clock-widget .clock-pin {
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
+        width: 12px !important;
+        height: 12px !important;
+        transform: translate(-50%, -50%) !important;
+        border-radius: 50% !important;
+        background: #111827 !important;
+        z-index: 6 !important;
+    }
+
+    .clock-widget .clock-digital {
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+        line-height: .95;
+        font-weight: 850;
+        color: #111827;
+    }
+
+    .clock-widget .clock-date {
+        margin-top: 10px;
+        font-weight: 800;
+        color: #64748b;
+    }
+
+    .clock-widget .clock-format-row {
+        display: flex;
+        justify-content: flex-end;
+        align-self: end;
+        gap: 5px;
+    }
+
+    .clock-widget .clock-format-row .small {
+        padding: 3px 8px !important;
+        font-size: 11px !important;
+        border-radius: 999px !important;
+        box-shadow: 1px 1px 0 #111827 !important;
+    }/* Very wide/short or small: digital only, with seconds. */
+
+    .clock-widget.clock-display-wide .clock-shell, .clock-widget.clock-display-small .clock-shell {
+        grid-template-rows: minmax(0, 1fr) auto;
+    }
+
+    .clock-widget.clock-display-wide .clock-analog-panel, .clock-widget.clock-display-small .clock-analog-panel {
+        display: none !important;
+    }
+
+    .clock-widget.clock-display-wide .clock-digital-panel, .clock-widget.clock-display-small .clock-digital-panel {
+        align-self: center;
+    }
+
+    .clock-widget.clock-display-wide .clock-digital {
+        font-size: clamp(44px, 12cqw, 110px) !important;
+    }
+
+    .clock-widget.clock-display-small .clock-digital {
+        font-size: clamp(30px, 13cqw, 76px) !important;
+    }
+
+    .clock-widget.clock-display-wide .clock-date, .clock-widget.clock-display-small .clock-date {
+        display: none !important;
+    }/* Medium: digital + date. */
+
+    .clock-widget.clock-display-medium .clock-shell {
+        grid-template-rows: minmax(0, 1fr) auto;
+    }
+
+    .clock-widget.clock-display-medium .clock-analog-panel {
+        display: none !important;
+    }
+
+    .clock-widget.clock-display-medium .clock-digital {
+        font-size: clamp(36px, 11cqw, 88px) !important;
+    }
+
+    .clock-widget.clock-display-medium .clock-date {
+        font-size: clamp(14px, 3.6cqw, 24px) !important;
+    }/* Large/square/tall: circular analogue clock + digital + date. */
+
+    .clock-widget.clock-display-analog .clock-shell {
+        grid-template-rows: minmax(0, 1fr) auto auto;
+    }
+
+    .clock-widget.clock-display-analog .clock-analog-panel {
+        align-self: end;
+        overflow: visible;
+    }
+
+    .clock-widget.clock-display-analog .analog {
+        width: min(100%, 58cqh, 320px) !important;
+    }
+
+    .clock-widget.clock-display-analog .clock-digital {
+        font-size: clamp(30px, 8.5cqw, 58px) !important;
+    }
+
+    .clock-widget.clock-display-analog .clock-date {
+        font-size: clamp(13px, 3.2cqw, 22px) !important;
+    }
+
+    @media (max-width: 700px) {
+        .clock-widget .analog {
+            border-width: 5px !important;
+        }
+
+        .clock-widget .tick-layer {
+            inset: 6px !important;
+        }
+
+        .clock-widget .clock-number {
+            font-size: clamp(13px, 6.2cqw, 26px) !important;
+        }
+
+        .clock-widget .clock-format-row .small {
+            padding: 2px 7px !important;
+            font-size: 10px !important;
+        }
+
+        .clock-widget.clock-display-analog .analog {
+            width: min(100%, 200px) !important;
+        }
+    }/* CLOCK FACE READABILITY FIX + SNAP REMOVAL */
+
+    .clock-widget .analog {
+        width: min(100%, 340px) !important;
+        border-width: 6px !important;
+        overflow: hidden !important;
+    }
+
+    .clock-widget .tick-layer {
+        inset: 5px !important;
+    }
+
+    .clock-widget .clock-number {
+        font-size: clamp(13px, 5.3cqw, 25px) !important;
+        font-weight: 850 !important;
+        z-index: 5 !important;
+    }
+
+    .clock-widget .hand {
+        z-index: 6 !important;
+    }
+
+    .clock-widget .hour {
+        width: 5px !important;
+        height: 24% !important;
+    }
+
+    .clock-widget .minute {
+        width: 4px !important;
+        height: 34% !important;
+    }
+
+    .clock-widget .second {
+        width: 2px !important;
+        height: 38% !important;
+    }
+
+    .clock-widget .clock-pin {
+        z-index: 8 !important;
+        width: 11px !important;
+        height: 11px !important;
+    }
+
+    .clock-widget.clock-display-analog .analog {
+        width: min(100%, 62cqh, 340px) !important;
+    }
+
+    .clock-widget.clock-display-analog .clock-digital {
+        margin-top: 8px !important;
+        font-size: clamp(30px, 8cqw, 58px) !important;
+    }
+
+    .clock-widget.clock-display-analog .clock-date {
+        margin-top: 8px !important;
+    }
+
+    .clock-widget .clock-format-row {
+        gap: 6px !important;
+    }
+
+    .clock-widget .clock-format-row .small {
+        opacity: .88 !important;
+    }/* CLOCK FORMAT BUTTON CENTRE FIX */
+
+    .clock-widget .clock-format-row {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 6px !important;
+        width: 100% !important;
+        align-self: center !important;
+    }/* DRAW MODE COMPACT GROUPED TOOLBAR */
+
+    body.draw-mode .toolbar {
+        max-width: min(760px, calc(100vw - 28px)) !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .draw-toolbar {
+        left: 50% !important;
+        right: auto !important;
+        bottom: calc(max(12px, env(safe-area-inset-bottom)) + 58px) !important;
+        transform: translateX(-50%) !important;
+        max-width: min(860px, calc(100vw - 28px)) !important;
+        width: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: nowrap !important;
+        gap: 6px !important;
+        padding: 7px 9px !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        border-radius: 16px !important;
+        border: 2px solid #111827 !important;
+        box-shadow: 4px 4px 0 #111827 !important;
+        background: rgba(255, 255, 255, .97) !important;
+        scrollbar-width: none !important;
+        white-space: nowrap !important;
+    }
+
+    .draw-toolbar::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .draw-toolbar.hidden {
+        display: none !important;
+    }/* create visual groups using existing button order */
+
+    .draw-toolbar .draw-tool:nth-of-type(1), .draw-toolbar .draw-tool:nth-of-type(2), .draw-toolbar .draw-tool:nth-of-type(3), .draw-toolbar .draw-tool:nth-of-type(4) {
+        margin-right: 0 !important;
+    }
+
+    .draw-toolbar .draw-tool:nth-of-type(4)::after, .draw-toolbar .draw-colour:nth-of-type(11)::after, .draw-toolbar .draw-size:nth-of-type(14)::after {
+        content: "";
+    }
+
+    .draw-tool, .draw-action, .draw-size {
+        min-width: 32px !important;
+        width: 32px !important;
+        height: 32px !important;
+        padding: 3px !important;
+        border-radius: 10px !important;
+        box-shadow: 1px 1px 0 #111827 !important;
+        display: inline-grid !important;
+        place-items: center !important;
+        flex: 0 0 auto !important;
+        font-size: 14px !important;
+    }
+
+    .draw-tool.active, .draw-size.active {
+        background: #eef2ff !important;
+        outline: 2px solid #6366f1 !important;
+        outline-offset: 1px !important;
+    }
+
+    .draw-colour {
+        width: 28px !important;
+        height: 28px !important;
+        min-width: 28px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        box-shadow: 1px 1px 0 #111827 !important;
+        flex: 0 0 auto !important;
+    }
+
+    .draw-colour.active {
+        outline: 3px solid #ec4899 !important;
+        outline-offset: 2px !important;
+    }
+
+    .draw-size span {
+        background: #111827 !important;
+    }
+
+    #clearDrawingBtn, #closeDrawBtn {
+        width: auto !important;
+        min-width: 42px !important;
+        height: 32px !important;
+        padding: 3px 8px !important;
+        font-size: 11px !important;
+        border-radius: 10px !important;
+        white-space: nowrap !important;
+        flex: 0 0 auto !important;
+    }
+
+    #clearDrawingBtn {
+        margin-left: 6px !important;
+    }
+
+    #closeDrawBtn {
+        background: #111827 !important;
+        color: #ffffff !important;
+    }/* separator lines between tools / colours / sizes / actions */
+
+    .draw-toolbar .draw-colour:first-of-type, .draw-toolbar .draw-size:first-of-type, #clearDrawingBtn {
+        border-left: 2px solid #e5e7eb !important;
+        margin-left: 6px !important;
+        padding-left: 6px !important;
+    }
+
+    @media (max-width: 700px) {
+        .draw-toolbar {
+            bottom: calc(max(8px, env(safe-area-inset-bottom)) + 50px) !important;
+            max-width: calc(100vw - 16px) !important;
+            justify-content: flex-start !important;
+            padding: 6px !important;
+            gap: 5px !important;
+        }
+
+        .draw-tool, .draw-action, .draw-size {
+            min-width: 29px !important;
+            width: 29px !important;
+            height: 29px !important;
+            font-size: 12px !important;
+        }
+
+        .draw-colour {
+            width: 25px !important;
+            height: 25px !important;
+            min-width: 25px !important;
+        }
+
+        #clearDrawingBtn, #closeDrawBtn {
+            min-width: 38px !important;
+            height: 29px !important;
+            font-size: 10px !important;
+            padding: 2px 6px !important;
+        }
+    }/* MAIN TOOLBAR DRAW MODE CLIPPING FIX */
+
+    body.draw-mode .toolbar {
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        scrollbar-width: none !important;
+        padding-right: 10px !important;
+    }
+
+    body.draw-mode .toolbar::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    body.draw-mode .toolbar::after {
+        content: "";
+        flex: 0 0 8px;
+    }/* TEXT TOOLBAR + PICTURE + WHEEL REQUEST FIXES */
+
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Poppins:wght@400;600;700;800&display=swap');
+    .text-widget .simple-text-tools {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 7px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .text-widget .simple-text-tools select.font {
+        min-width: 185px !important;
+        max-width: 230px !important;
+        height: 34px !important;
+        border: 2px solid #111827 !important;
+        border-radius: 10px !important;
+        padding: 4px 8px !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+        font-size: 13px !important;
+        font-weight: 800 !important;
+    }
+
+    .text-widget .simple-text-tools button {
+        height: 34px !important;
+        min-height: 34px !important;
+        min-width: 34px !important;
+        padding: 4px 8px !important;
+        border-radius: 10px !important;
+        font-size: 13px !important;
+        font-weight: 900 !important;
+    }
+
+    .text-widget .simple-text-tools .hide-tools {
+        min-width: 74px !important;
+    }
+
+    .toolbar-group.widget-buttons .file-btn.widget-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        line-height: 1 !important;
+    }
+
+    .wheel-widget .wheel-body {
+        grid-template-columns: minmax(270px, 1fr) minmax(210px, 260px) !important;
+        gap: 12px !important;
+    }
+
+    .wheel-widget .wheel-stage {
+        display: grid !important;
+        justify-items: center !important;
+        align-content: start !important;
+        gap: 10px !important;
+        overflow: hidden !important;
+    }
+
+    .wheel-widget .wheel-right-column {
+        display: grid !important;
+        grid-template-rows: minmax(0, 1fr) auto !important;
+        gap: 10px !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .wheel-widget .wheel-settings-details, .wheel-widget .called-details {
+        min-height: 0 !important;
+        overflow: auto !important;
+    }
+
+    .wheel-widget .called-box {
+        max-height: 160px !important;
+        overflow: auto !important;
+    }
+
+    .wheel-widget .called-pill {
+        margin: 4px 0 !important;
+    }
+
+    .wheel-winner-remove {
+        border: 2px solid #111827 !important;
+        border-radius: 999px !important;
+        padding: 8px 12px !important;
+        background: #f97316 !important;
+        color: #ffffff !important;
+        font-weight: 950 !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+        margin-right: 8px !important;
+    }
+
+    .wheel-winner-remove.hidden {
+        display: none !important;
+    }
+
+    @media (max-width: 700px) {
+        .text-widget .simple-text-tools select.font {
+            min-width: 145px !important;
+            max-width: 170px !important;
+            height: 28px !important;
+            font-size: 11px !important;
+        }
+
+        .text-widget .simple-text-tools button {
+            height: 28px !important;
+            min-height: 28px !important;
+            min-width: 28px !important;
+            font-size: 11px !important;
+            padding: 3px 6px !important;
+        }
+
+        .wheel-widget .wheel-body {
+            grid-template-columns: 1fr !important;
+            grid-template-rows: minmax(0, 1fr) minmax(160px, auto) !important;
+        }
+
+        .wheel-widget .called-box {
+            max-height: 100px !important;
+        }
+    }/* REQUESTED CLEANUP: TEXT, TIMER, WHEEL POPUP */
+
+    .text-widget .simple-text-tools .hide-tools {
+        display: none !important;
+    }
+
+    .timer-widget .settings, .timer-widget .timer-settings {
+        display: none !important;
+    }
+
+    .timer-widget .timer-side {
+        align-content: center !important;
+        justify-content: center !important;
+    }
+
+    .wheel-winner-remove {
+        border: 2px solid #111827 !important;
+        border-radius: 999px !important;
+        padding: 8px 12px !important;
+        background: #f97316 !important;
+        color: #ffffff !important;
+        font-weight: 950 !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+        margin-right: 8px !important;
+    }
+
+    .wheel-winner-remove.hidden {
+        display: none !important;
+    }/* WHEEL WINNER REMOVE BUTTON FIX */
+
+    .wheel-winner-card {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .wheel-winner-remove {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-top: 4px !important;
+        border: 2px solid #111827 !important;
+        border-radius: 999px !important;
+        padding: 10px 16px !important;
+        background: #f97316 !important;
+        color: #ffffff !important;
+        font-weight: 950 !important;
+        font-size: clamp(14px, 2vw, 18px) !important;
+        box-shadow: 3px 3px 0 #111827 !important;
+    }
+
+    .wheel-winner-remove.hidden {
+        display: none !important;
     }
     </style>
 </head>
@@ -2911,6 +3953,7 @@
                 </select>
                 <button id="saveBtn" class="icon-action" type="button" title="Save layout">💾</button>
                 <button id="loadBtn" class="icon-action" type="button" title="Load layout">📂</button>
+                <button id="bgBtn" class="icon-action" type="button" title="Background">▦</button>
                 <button id="hideToolbarBtn" class="icon-action" type="button" title="Hide bar">👁</button>
                 <button id="clearBtn" class="icon-action danger" type="button" title="Clear board">🗑</button>
                 <input id="layoutInput" type="file" accept=".json,application/json">
@@ -2968,12 +4011,21 @@
     </main>
     </div>
 
+    <div id="bgPanel" class="bg-panel hidden">
+        <button data-bg="grid" type="button">Grid</button>
+        <button data-bg="plain" type="button">Plain</button>
+        <button data-bg="dark" type="button">Dark</button>
+        <button data-bg="green" type="button">Green board</button>
+        <button data-bg="dots" type="button">Dots</button>
+    </div>
+
     <div id="wheelWinnerPopup" class="wheel-winner-popup">
         <div class="wheel-winner-confetti"></div>
         <div class="wheel-winner-card">
             <button id="wheelWinnerClose" class="wheel-winner-close" type="button">×</button>
             <div class="wheel-winner-label">Selected name</div>
             <div id="wheelWinnerName" class="wheel-winner-name">Name</div>
+            <button id="wheelWinnerRemove" class="wheel-winner-remove hidden" type="button">Remove from Wheel</button>
         </div>
     </div>
 
@@ -3023,11 +4075,18 @@
         const wheelWinnerPopup = document.getElementById("wheelWinnerPopup");
         const wheelWinnerName = document.getElementById("wheelWinnerName");
         const wheelWinnerClose = document.getElementById("wheelWinnerClose");
+        const wheelWinnerRemove = document.getElementById("wheelWinnerRemove");
+        let activeWheelRemoveWinner = null;
         const drawBtn = document.getElementById("drawBtn");
         const drawCanvas = document.getElementById("drawCanvas");
         const drawToolbar = document.getElementById("drawToolbar");
         const clearDrawingBtn = document.getElementById("clearDrawingBtn");
         const closeDrawBtn = document.getElementById("closeDrawBtn");
+        // DRAW_TOOLBAR_LABEL_SHORTENING
+        if (clearDrawingBtn)
+            clearDrawingBtn.textContent = "Clear";
+        if (closeDrawBtn)
+            closeDrawBtn.textContent = "×";
         const classFolderInput = document.getElementById("classFolderInput");
         const classSelect = document.getElementById("classSelect");
         const widgetButtons = document.querySelectorAll(".widget-btn[data-widget]");
@@ -3039,6 +4098,8 @@
         const layoutInput = document.getElementById("layoutInput");
         const helpModal = document.getElementById("helpModal");
         const closeHelpBtn = document.getElementById("closeHelpBtn");
+        const bgBtn = document.getElementById("bgBtn");
+        const bgPanel = document.getElementById("bgPanel");
 
         let zTop = 5;
         let selected = new Set();
@@ -3104,6 +4165,25 @@
             };
         }
 
+        function drawLineSegment(from, to, event) {
+            const pressureRaw = event && typeof event.pressure === "number" && event.pressure > 0 ? event.pressure : 0.5;
+            const pressure = drawTool === "pen" ? clamp(pressureRaw, 0.18, 1) : 1;
+            const width = drawTool === "highlighter"
+            ? drawSize * 2.2
+            : drawTool === "eraser"
+            ? drawSize * 2.4
+            : drawSize * (0.55 + pressure * 1.15);
+
+            drawCtx.globalCompositeOperation = drawTool === "eraser" ? "destination-out" : "source-over";
+            drawCtx.globalAlpha = drawTool === "highlighter" ? 0.35 : 1;
+            drawCtx.strokeStyle = drawColour;
+            drawCtx.lineWidth = width;
+            drawCtx.beginPath();
+            drawCtx.moveTo(from.x, from.y);
+            drawCtx.lineTo(to.x, to.y);
+            drawCtx.stroke();
+        }
+
         function startDrawing(event) {
             if (drawTool === "select")
                 return;
@@ -3111,32 +4191,27 @@
             event.preventDefault();
             drawing = true;
             const p = getDrawPoint(event);
-
-            drawCtx.globalCompositeOperation = drawTool === "eraser" ? "destination-out" : "source-over";
-            drawCtx.globalAlpha = drawTool === "highlighter" ? 0.35 : 1;
-            drawCtx.strokeStyle = drawColour;
-            drawCtx.lineWidth = drawTool === "highlighter" ? drawSize * 2.2 : drawTool === "eraser" ? drawSize * 2.4 : drawSize;
-
-            drawCtx.beginPath();
-            drawCtx.moveTo(p.x, p.y);
+            drawCtx.lineCap = "round";
+            drawCtx.lineJoin = "round";
+            drawSnapshot = p;
             drawCanvas.setPointerCapture(event.pointerId);
         }
 
         function moveDrawing(event) {
-            if (!drawing)
+            if (!drawing || !drawSnapshot)
                 return;
 
             event.preventDefault();
             const p = getDrawPoint(event);
-            drawCtx.lineTo(p.x, p.y);
-            drawCtx.stroke();
+            drawLineSegment(drawSnapshot, p, event);
+            drawSnapshot = p;
         }
 
         function stopDrawing(event) {
             if (!drawing)
                 return;
             drawing = false;
-            drawCtx.closePath();
+            drawSnapshot = null;
             drawCtx.globalAlpha = 1;
             drawCtx.globalCompositeOperation = "source-over";
         }
@@ -3199,10 +4274,12 @@
             };
         }
         function defaultPos() {
-            nextPos = (nextPos + 34) % 260;
+            const phone = window.matchMedia("(max-width:700px)").matches;
+            const margin = phone ? 12 : 24;
+            nextPos = (nextPos + (phone ? 16 : 34)) % (phone ? 80 : 260);
             return {
-                x: boardWrap.scrollLeft + 70 + nextPos,
-                y: boardWrap.scrollTop + 70 + nextPos
+                x: clamp(margin + nextPos, margin, Math.max(margin, board.clientWidth - 300)),
+                y: clamp(margin + 8 + nextPos, margin, Math.max(margin, board.clientHeight - 220))
             };
         }
 
@@ -3263,8 +4340,6 @@
                 d.dataset.handle = h;
                 el.appendChild(d);
                 d.addEventListener("pointerdown", e => {
-                    if (el.classList.contains("locked"))
-                        return;
                     e.preventDefault();
                     e.stopPropagation();
                     if (!selected.has(el))
@@ -3275,7 +4350,7 @@
                         handle: h,
                         startX: p.x,
                         startY: p.y,
-                        items: selectedItems().filter(x => !x.classList.contains("locked")).map(item => ({
+                        items: selectedItems().map(item => ({
                             item,
                             x: parseFloat(item.style.left) || 0,
                             y: parseFloat(item.style.top) || 0,
@@ -3290,6 +4365,66 @@
         }
 
         function makeItem(type, title, w=420, h=240, data={}) {
+            const phone = window.matchMedia("(max-width:700px)").matches;
+            const tablet = window.matchMedia("(min-width:701px) and (max-width:1100px)").matches;
+            const margin = phone ? 12 : 24;
+            const toolbarReserve = phone ? 128 : 98;
+
+            const defaults = {
+                text: phone ? {
+                    w: 340,
+                    h: 240
+                } : tablet ? {
+                    w: 460,
+                    h: 300
+                } : null,
+                timer: phone ? {
+                    w: 360,
+                    h: 170
+                } : tablet ? {
+                    w: 500,
+                    h: 210
+                } : null,
+                clock: phone ? {
+                    w: 320,
+                    h: 180
+                } : tablet ? {
+                    w: 420,
+                    h: 230
+                } : null,
+                exam: phone ? {
+                    w: 360,
+                    h: 470
+                } : tablet ? {
+                    w: 650,
+                    h: 530
+                } : null,
+                group: phone ? {
+                    w: 360,
+                    h: 430
+                } : tablet ? {
+                    w: 560,
+                    h: 450
+                } : null,
+                wheel: phone ? {
+                    w: 360,
+                    h: 470
+                } : tablet ? {
+                    w: 620,
+                    h: 540
+                } : null
+            };
+
+            if (!data.w && !data.h && defaults[type]) {
+                w = defaults[type].w;
+                h = defaults[type].h;
+            }
+
+            const maxW = Math.max(260, board.clientWidth - margin * 2);
+            const maxH = Math.max(180, board.clientHeight - toolbarReserve - margin * 2);
+            const finalW = Math.min(data.w || w, maxW);
+            const finalH = Math.min(data.h || h, maxH);
+
             const pos = data.x != null ? {
                 x: data.x,
                 y: data.y
@@ -3298,21 +4433,16 @@
             item.className = "item widget " + type + "-widget";
             item.dataset.type = type;
             item.dataset.id = data.id || uid();
-            item.style.left = pos.x + "px";
-            item.style.top = pos.y + "px";
-            item.style.width = (data.w || w) + "px";
-            item.style.height = (data.h || h) + "px";
+            item.style.left = clamp(pos.x, margin, Math.max(margin, board.clientWidth - finalW - margin)) + "px";
+            item.style.top = clamp(pos.y, margin, Math.max(margin, board.clientHeight - finalH - toolbarReserve)) + "px";
+            item.style.width = finalW + "px";
+            item.style.height = finalH + "px";
             item.style.zIndex = data.z || ++zTop;
-            if (data.locked)
-                item.classList.add("locked");
 
             item.innerHTML = `
                   <div class="widget-header">
                     <span class="widget-title">${title}</span>
-                    <span class="drag-hint">${data.locked ? "locked" : "drag here"}</span>
-                    <button class="icon-btn lock-btn" title="Lock/unlock">🔒</button>
-                    <button class="icon-btn dup-btn" title="Duplicate">⧉</button>
-                    <button class="icon-btn close-btn" title="Close">×</button>
+                    <button class="icon-btn close-btn" title="Close" type="button">×</button>
                   </div>
                   <div class="widget-body"></div>
                 `;
@@ -3325,23 +4455,12 @@
                 e.stopPropagation();
                 removeItems([item]);
             });
-            item.querySelector(".dup-btn").addEventListener("click", e => {
-                e.stopPropagation();
-                duplicateItems([item]);
-            });
-            item.querySelector(".lock-btn").addEventListener("click", e => {
-                e.stopPropagation();
-                item.classList.toggle("locked");
-                item.querySelector(".drag-hint").textContent = item.classList.contains("locked") ? "locked" : "drag here";
-            });
 
             header.addEventListener("pointerdown", e => {
-                if (item.classList.contains("locked") || e.target.closest("button"))
+                if (e.target.closest("button"))
                     return;
                 e.preventDefault();
                 e.stopPropagation();
-                if (e.target.closest(".picture-delete-btn"))
-                    return;
                 if (e.shiftKey)
                     toggleSelect(item);
                 else if (!selected.has(item))
@@ -3352,7 +4471,7 @@
                     mode: "drag",
                     startX: p.x,
                     startY: p.y,
-                    items: selectedItems().filter(x => !x.classList.contains("locked")).map(i => ({
+                    items: selectedItems().map(i => ({
                         item: i,
                         x: parseFloat(i.style.left) || 0,
                         y: parseFloat(i.style.top) || 0
@@ -3362,7 +4481,7 @@
             });
 
             item.addEventListener("pointerdown", e => {
-                if (e.target.closest("button,input,textarea,select,[contenteditable=true],.resize-dot,.student-pill"))
+                if (e.target.closest("button,input,textarea,select,[contenteditable=true],.resize-dot,.student-pill,canvas,details,summary"))
                     return;
                 if (e.shiftKey) {
                     e.stopPropagation();
@@ -3676,9 +4795,15 @@
         }
 
 
-        function showWheelWinnerPopup(name) {
+        function showWheelWinnerPopup(name, removeCallback=null) {
             if (!name)
                 return;
+
+            activeWheelRemoveWinner = removeCallback;
+            if (wheelWinnerRemove) {
+                wheelWinnerRemove.classList.toggle("hidden", !removeCallback);
+                wheelWinnerRemove.style.display = removeCallback ? "inline-flex" : "none";
+            }
 
             wheelWinnerName.textContent = name;
             wheelWinnerPopup.classList.add("show");
@@ -3705,6 +4830,11 @@
 
         function hideWheelWinnerPopup() {
             wheelWinnerPopup.classList.remove("show");
+            activeWheelRemoveWinner = null;
+            if (wheelWinnerRemove) {
+                wheelWinnerRemove.classList.add("hidden");
+                wheelWinnerRemove.style.display = "none";
+            }
         }
 
 
@@ -3819,40 +4949,20 @@
             body.innerHTML = `
                   <button class="small text-show-tools" type="button">Show tools</button>
                   <div class="text-body">
-                    <div class="text-tools">
+                    <div class="text-tools simple-text-tools">
                       <select class="font" title="Font">
-                        <option value="system-ui,sans-serif">System</option>
-                        <option value="Arial,sans-serif">Arial</option>
-                        <option value="Georgia,serif">Georgia</option>
-                        <option value="'Courier New',monospace">Courier</option>
-                        <option value="'Comic Sans MS',cursive">Comic</option>
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                        <option value="'Courier New', Courier, monospace">Courier</option>
+                        <option value="'Open Sans', Arial, sans-serif">Open Sans</option>
+                        <option value="Poppins, Arial, sans-serif">Poppins</option>
                       </select>
-                      <input class="size" type="number" min="10" max="160" value="28" title="Font size">
-
-                      <span class="text-toolbar-divider"></span>
-
                       <button class="b" type="button" title="Bold">B</button>
                       <button class="i" type="button" title="Italic"><i>I</i></button>
                       <button class="u" type="button" title="Underline"><u>U</u></button>
                       <button class="sub" type="button" title="Subscript">x₂</button>
                       <button class="sup" type="button" title="Superscript">x²</button>
-
-                      <span class="text-toolbar-divider"></span>
-
-                      <button class="left" type="button" title="Align left">←</button>
-                      <button class="centre" type="button" title="Centre">☰</button>
-                      <button class="right" type="button" title="Align right">→</button>
-                      <button class="list" type="button" title="Bullets">•</button>
-
-                      <span class="text-toolbar-divider"></span>
-
-                      <input class="colour" type="color" value="#111827" title="Text colour">
-                      <button class="symbols-toggle" type="button" title="Chemistry symbols">H₂</button>
-                      <button class="hide-tools" type="button" title="Hide toolbar">Hide tools</button>
-
-                      <div class="text-symbol-panel">
-                        ${["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉", "⁺", "⁻", "²", "³", "→", "⇌"].map(s => `<button type="button" class="sym" data-s="${s}">${s}</button>`).join("")}
-                      </div>
+                      
                     </div>
                     <div class="text-editor" contenteditable="true">${data.html || ""}</div>
                   </div>`;
@@ -3860,7 +4970,6 @@
             const ed = body.querySelector(".text-editor");
             const tools = body.querySelector(".text-tools");
             const showToolsBtn = body.querySelector(".text-show-tools");
-            const symbolPanel = body.querySelector(".text-symbol-panel");
             let textToolsTimer = null;
 
             function showTextTools() {
@@ -3895,26 +5004,27 @@
                 showTextTools();
             }, false);
 
-            tools.addEventListener("click", event => {
-                showTextTools();
-            }, false);
-
             showToolsBtn.addEventListener("pointerdown", event => {
                 event.stopPropagation();
                 showTextTools();
             }, true);
+
             showToolsBtn.addEventListener("click", event => {
                 event.stopPropagation();
                 showTextTools();
                 ed.focus();
             }, true);
 
+            body.querySelector(".font").onchange = e => {
+                ed.style.fontFamily = e.target.value;
+                ed.focus();
+                hideTextToolsSoon(1800);
+            };
 
             tools.addEventListener("click", event => {
                 const btn = event.target.closest("button");
                 if (!btn)
                     return;
-
                 event.stopPropagation();
                 showTextTools();
 
@@ -3934,38 +5044,7 @@
                         document.execCommand("subscript");
                     exec("superscript");
                 }
-                else if (btn.classList.contains("left"))
-                    exec("justifyLeft");
-                else if (btn.classList.contains("centre"))
-                    exec("justifyCenter");
-                else if (btn.classList.contains("right"))
-                    exec("justifyRight");
-                else if (btn.classList.contains("list"))
-                    exec("insertUnorderedList");
-                else if (btn.classList.contains("symbols-toggle")) {
-                    symbolPanel.classList.toggle("open");
-                    showTextTools();
-                }
-                else if (btn.classList.contains("hide-tools")) {
-                    item.classList.add("tools-hidden");
-                }
-                else if (btn.classList.contains("sym")) {
-                    exec("insertText", btn.dataset.s);
-                }
             });
-
-            body.querySelector(".font").onchange = e => {
-                ed.style.fontFamily = e.target.value;
-                ed.focus();
-                hideTextToolsSoon(1800);
-            };
-
-            body.querySelector(".size").oninput = e => {
-                ed.style.fontSize = clamp(parseInt(e.target.value) || 28, 10, 160) + "px";
-                ed.focus();
-                hideTextToolsSoon(1800);
-            };
-            body.querySelector(".colour").oninput = e => exec("foreColor", e.target.value);
 
             ed.addEventListener("keydown", e => {
                 const cmd = navigator.platform.toUpperCase().includes("MAC") ? e.metaKey : e.ctrlKey;
@@ -3997,12 +5076,8 @@
                       <div class="timer-time"><span class="mins">10</span><span class="timer-colon">:</span><span class="secs">00</span></div>
                       <div class="timer-adjust"><button class="nudge subm">−</button><span></span><button class="nudge subs">−</button></div>
                     </div>
-                    <div class="timer-side"><button class="round primary play">▶</button><button class="round reset">□</button><button class="round settings">⚙</button></div>
-                  </div>
-                  <details class="timer-settings hidden"><summary>Settings</summary>
-                    <div class="row"><label class="field">Repeat count<input class="repeat clean-input" type="number" min="0" max="20" value="0"></label><label><input class="resetDone" type="checkbox"> reset when completed</label></div>
-                    <div class="row"><button class="small preset" data-min="5">5 min</button><button class="small preset" data-min="10">10 min</button><button class="small preset" data-min="15">15 min</button><button class="small preset" data-min="30">30 min</button></div>
-                  </details>`;
+                    <div class="timer-side"><button class="round primary play">▶</button><button class="round reset">□</button></div>
+                  </div>`;
             const prog = body.querySelector(".tc-prog"),
                 mins = body.querySelector(".mins"),
                 secs = body.querySelector(".secs"),
@@ -4012,7 +5087,6 @@
             let total = data.total || 600,
                 rem = data.rem || total,
                 running = false,
-                used = 0,
                 int = null;
             const render = () => {
                 mins.textContent = pad(Math.floor(rem / 60));
@@ -4032,14 +5106,13 @@
             body.querySelector(".subm").onclick = () => nudge(-60);
             body.querySelector(".adds").onclick = () => nudge(10);
             body.querySelector(".subs").onclick = () => nudge(-10);
-            body.querySelector(".settings").onclick = () => body.querySelector(".timer-settings").classList.toggle("hidden");
-            body.querySelectorAll(".preset").forEach(b => b.onclick = () => setTime(+b.dataset.min * 60));
+
+
             body.querySelector(".reset").onclick = () => {
                 running = false;
                 clearInterval(int);
                 play.textContent = "▶";
                 rem = total;
-                used = 0;
                 render()
             };
             play.onclick = () => {
@@ -4050,19 +5123,10 @@
                         rem--;
                         if (rem <= 0) {
                             beep();
-                            const max = +body.querySelector(".repeat").value || 0;
-                            if (used < max) {
-                                used++;
-                                rem = total
-                            } else {
-                                running = false;
-                                clearInterval(int);
-                                play.textContent = "▶";
-                                if (body.querySelector(".resetDone").checked)
-                                    rem = total;
-                                else
-                                    rem = 0
-                            }
+                            running = false;
+                            clearInterval(int);
+                            play.textContent = "▶";
+                            rem = 0;
                         }
                         render()
                     }, 1000)
@@ -4079,36 +5143,78 @@
         }
 
         function addClock(data={}) {
-            const {item, body} = makeItem("clock", "Clock", 330, 230, data);
+            const {item, body} = makeItem("clock", "Clock", 360, 260, data);
             body.innerHTML = `
-                  <div class="clock-digital"></div><div class="clock-date"></div>
-                  <div class="analog hidden"><div class="clock-number" style="left:50%;top:8%">12</div><div class="clock-number" style="left:92%;top:50%">3</div><div class="clock-number" style="left:50%;top:92%">6</div><div class="clock-number" style="left:8%;top:50%">9</div><div class="hand hour"></div><div class="hand minute"></div><div class="hand second"></div></div>
-                  <details><summary>Settings</summary><div class="row"><button class="small toggle">Analog</button><button class="small f24 active">24h</button><button class="small f12">12h</button><label class="field">Alarm<input class="alarm" type="time"></label></div></details>`;
-            const dig = body.querySelector(".clock-digital"),
-                date = body.querySelector(".clock-date"),
-                analog = body.querySelector(".analog");
-            let mode = data.mode || "digital",
-                format = data.format || "24h",
-                lastAlarm = "";
-            const fmt = d => format === "12h" ? d.toLocaleTimeString([], {
+                  <div class="clock-shell">
+                    <div class="clock-analog-panel">
+                      <div class="analog">
+                        <div class="tick-layer"></div>
+                        ${Array.from({length: 12}, (_, i) => {const n = i === 0 ? 12 : i;const angle = (i * 30 - 90) * Math.PI / 180;const x = 50 + 41.5 * Math.cos(angle);const y = 50 + 41.5 * Math.sin(angle);return `<div class="clock-number n${n}" style="left:${x}%;top:${y}%">${n}</div>`;}).join("")}
+                        <div class="hand hour"></div>
+                        <div class="hand minute"></div>
+                        <div class="hand second"></div>
+                        <div class="clock-pin"></div>
+                      </div>
+                    </div>
+                    <div class="clock-digital-panel">
+                      <div class="clock-digital"></div>
+                      <div class="clock-date"></div>
+                    </div>
+                    <div class="clock-format-row">
+                      <button class="small f24 active" type="button">24h</button>
+                      <button class="small f12" type="button">12h</button>
+                    </div>
+                  </div>`;
+            const dig = body.querySelector(".clock-digital");
+            const date = body.querySelector(".clock-date");
+            let format = data.format || "24h";
+            const tickLayer = body.querySelector(".tick-layer");
+            tickLayer.innerHTML = Array.from({
+                length: 60
+            }, (_, i) => `<span class="${i % 5 === 0 ? 'major' : 'minor'}" style="--a:${i * 6}deg"></span>`).join("");
+            const fmt = d => format === "12h"
+            ? d.toLocaleTimeString([], {
                 hour: "numeric",
                 minute: "2-digit",
                 second: "2-digit",
                 hour12: true
-            }) : d.toLocaleTimeString([], {
+            })
+            : d.toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
                 second: "2-digit",
                 hour12: false
             });
-            const renderMode = () => {
-                analog.classList.toggle("hidden", mode !== "analog");
-                dig.classList.toggle("hidden", mode === "analog");
-                date.classList.toggle("hidden", mode === "analog");
-                body.querySelector(".toggle").textContent = mode === "analog" ? "Digital" : "Analog";
+
+            const setAutoClass = () => {
+                const w = item.offsetWidth;
+                const h = item.offsetHeight;
+                const bodyH = Math.max(1, body.clientHeight || h - 28);
+                const ratio = w / Math.max(1, h);
+
+                item.classList.remove(
+                "clock-display-wide",
+                "clock-display-small",
+                "clock-display-medium",
+                "clock-display-analog"
+                );
+
+                // Never squash the analogue face. It is shown only when there is enough height
+                // for a circular face plus digital time/date/buttons.
+                if (w < 310 || h < 185) {
+                    item.classList.add("clock-display-small"); // digital only
+                } else if (ratio > 1.75 || bodyH < 235) {
+                    item.classList.add("clock-display-wide"); // digital only
+                } else if (bodyH < 320) {
+                    item.classList.add("clock-display-medium"); // digital + date
+                } else {
+                    item.classList.add("clock-display-analog"); // analogue + digital + date
+                }
+
                 body.querySelector(".f24").classList.toggle("active", format === "24h");
                 body.querySelector(".f12").classList.toggle("active", format === "12h");
             };
+
             const tick = () => {
                 const now = new Date();
                 dig.textContent = fmt(now);
@@ -4123,37 +5229,31 @@
                 body.querySelector(".second").style.transform = `translateX(-50%) rotate(${s * 6}deg)`;
                 body.querySelector(".minute").style.transform = `translateX(-50%) rotate(${m * 6 + s * .1}deg)`;
                 body.querySelector(".hour").style.transform = `translateX(-50%) rotate(${h * 30 + m * .5}deg)`;
-                const alarm = body.querySelector(".alarm").value,
-                    cur = now.toTimeString().slice(0, 5);
-                if (alarm && alarm === cur && lastAlarm !== cur) {
-                    lastAlarm = cur;
-                    beep();
-                    alert("Clock alarm")
-                }
-                if (cur !== alarm)
-                    lastAlarm = ""
             };
-            body.querySelector(".toggle").onclick = () => {
-                mode = mode === "analog" ? "digital" : "analog";
-                renderMode()
-            };
+
             body.querySelector(".f24").onclick = () => {
                 format = "24h";
-                renderMode();
+                setAutoClass();
                 tick()
             };
             body.querySelector(".f12").onclick = () => {
                 format = "12h";
-                renderMode();
+                setAutoClass();
                 tick()
             };
+
+            const ro = new ResizeObserver(() => setAutoClass());
+            ro.observe(item);
             const int = setInterval(tick, 1000);
-            item._cleanup = () => clearInterval(int);
+            item._cleanup = () => {
+                clearInterval(int);
+                ro.disconnect();
+            };
+            item._onResize = () => setAutoClass();
             item._serialize = () => ({
-                mode,
                 format
             });
-            renderMode();
+            setAutoClass();
             tick();
         }
 
@@ -4406,25 +5506,41 @@
         }
 
         function addWheel(data={}) {
-            const {item, body} = makeItem("wheel", "Wheel of Names", 560, 560, data);
+            const {item, body} = makeItem("wheel", "Wheel of Names", 620, 560, data);
             body.innerHTML = `
                   <div class="wheel-body">
-                    <div class="wheel-stage"><div class="wheel-wrap"><div class="wheel-pointer"></div><canvas class="wheel-canvas"></canvas><div class="wheel-hub">SPIN</div><div class="confetti"></div></div><button class="primary spin">Spin wheel</button><div class="card" style="width:100%;text-align:center"><div class="card-title">Selected name</div><div class="card-value result" style="font-size:24px">None yet</div></div><details class="called-details" open><summary>Called names</summary><div class="called-box"><div class="called-list muted">No one called yet</div><button class="small clear-called">Clear called</button></div></details><button class="danger remove-winner">Remove from wheel</button></div>
-                    <details class="wheel-panel wheel-settings-details">
-                      <summary>Names / Settings</summary>
-                      <label class="field">Names<textarea class="names-box">${data.names || "Ali\nBala\nChandra\nDina\nEthan\nFarah"}</textarea></label>
-                      <div class="row">
-                        <button class="small load-class" type="button">Load selected class</button>
-                        <button class="small update" type="button">Update wheel</button>
-                        <button class="small reset-wheel" type="button">Reset original class</button>
+                    <div class="wheel-stage">
+                      <div class="wheel-wrap">
+                        <div class="wheel-pointer"></div>
+                        <canvas class="wheel-canvas"></canvas>
+                        <div class="wheel-hub">SPIN</div>
+                        <div class="confetti"></div>
                       </div>
-                      <label style="display:flex;align-items:flex-start;gap:6px;"><input class="no-repeat" type="checkbox" ${data.noRepeat ? "checked" : ""}> <span>do not repeat until all called</span></label>
-                    </details>
+                      <button class="primary spin">Spin wheel</button>
+                    </div>
+                    <div class="wheel-panel wheel-right-column">
+                      <details class="wheel-settings-details" open>
+                        <summary>Names / Settings</summary>
+                        <label class="field">Names<textarea class="names-box">${data.names || "Ali\nBala\nChandra\nDina\nEthan\nFarah"}</textarea></label>
+                        <div class="row">
+                          <button class="small load-class" type="button">Load selected class</button>
+                          <button class="small update" type="button">Update wheel</button>
+                          <button class="small reset-wheel" type="button">Reset original class</button>
+                        </div>
+                        <label style="display:flex;align-items:flex-start;gap:6px;"><input class="no-repeat" type="checkbox" ${data.noRepeat ? "checked" : ""}> <span>do not repeat until all called</span></label>
+                      </details>
+                      <details class="called-details" open>
+                        <summary>Called names</summary>
+                        <div class="called-box">
+                          <div class="called-list muted">No one called yet</div>
+                          <button class="small clear-called" type="button">Clear called</button>
+                        </div>
+                      </details>
+                    </div>
                   </div>`;
             const canvas = body.querySelector(".wheel-canvas"),
                 ctx = canvas.getContext("2d"),
                 namesBox = body.querySelector(".names-box"),
-                result = body.querySelector(".result"),
                 calledList = body.querySelector(".called-list");
             const colours = ["#f97316", "#22c55e", "#3b82f6", "#eab308", "#a855f7", "#ef4444", "#14b8a6", "#f472b6"];
             let names = [],
@@ -4526,9 +5642,9 @@
                 if (idx >= 0)
                     arr.splice(idx, 1);
                 namesBox.value = arr.join("\n");
-                result.textContent = `Removed: ${selectedName}`;
                 selectedName = "";
-                draw()
+                draw();
+                showToast("Removed from wheel")
             };
             body.querySelector(".spin").onclick = () => {
                 if (spinning)
@@ -4546,7 +5662,7 @@
                 names = getNames();
                 if (!names.length) {
                     stopWheelSpinSound();
-                    result.textContent = "Add names first";
+                    showToast("Add names first");
                     return
                 }
                 spinning = true;
@@ -4568,14 +5684,11 @@
                         rotation %= Math.PI * 2;
                         draw();
                         selectedName = winner();
-                        result.textContent = selectedName;
                         called.push(selectedName);
                         renderCalled();
-                        showWheelWinnerPopup(selectedName);
+                        showWheelWinnerPopup(selectedName, removeWinner);
                         beepTaDa();
-                        confetti();
-                        if (body.querySelector(".no-repeat").checked)
-                            removeWinner()
+                        confetti()
                     }
                 };
                 requestAnimationFrame(anim)
@@ -4590,7 +5703,6 @@
                 original = namesBox.value;
                 called = [];
                 selectedName = "";
-                result.textContent = "None yet";
                 renderCalled();
                 draw()
             };
@@ -4598,7 +5710,6 @@
                 original = namesBox.value;
                 called = [];
                 selectedName = "";
-                result.textContent = "None yet";
                 renderCalled();
                 draw()
             };
@@ -4606,11 +5717,9 @@
                 namesBox.value = original;
                 called = [];
                 selectedName = "";
-                result.textContent = "None yet";
                 renderCalled();
                 draw()
             };
-            body.querySelector(".remove-winner").onclick = removeWinner;
             body.querySelector(".clear-called").onclick = () => {
                 called = [];
                 renderCalled()
@@ -4646,8 +5755,7 @@
                 y: parseFloat(item.style.top) || 0,
                 w: item.offsetWidth,
                 h: item.offsetHeight,
-                z: +item.style.zIndex || 2,
-                locked: item.classList.contains("locked")
+                z: +item.style.zIndex || 2
             };
             if (base.type === "image")
                 base.src = item.querySelector("img").src;
@@ -4659,6 +5767,7 @@
             const data = {
                 version: 2,
                 created: new Date().toISOString(),
+                bg: board.dataset.bg || "grid",
                 items: [...objectLayer.querySelectorAll(".item")].map(serializeItem),
                 classLists,
                 drawing: drawCanvas.toDataURL("image/png")
@@ -4683,6 +5792,8 @@
                 i.remove()
             });
             clearSelection();
+            if (data.bg)
+                applyBoardBackground(data.bg);
             classLists = data.classLists || classLists;
             updateClassSelect();
             (data.items || []).forEach(createFromData);
@@ -4738,6 +5849,13 @@
 
 
 
+        if (wheelWinnerRemove) {
+            wheelWinnerRemove.onclick = () => {
+                if (activeWheelRemoveWinner)
+                    activeWheelRemoveWinner();
+                hideWheelWinnerPopup();
+            };
+        }
         wheelWinnerClose.onclick = hideWheelWinnerPopup;
         wheelWinnerPopup.addEventListener("click", e => {
             if (e.target === wheelWinnerPopup)
@@ -4820,6 +5938,31 @@
                 helpModal.style.display = "none"
         };
 
+
+        function applyBoardBackground(bg) {
+            board.dataset.bg = bg || "grid";
+            localStorage.setItem("classroom-whiteboard-bg", board.dataset.bg);
+        }
+
+        applyBoardBackground(localStorage.getItem("classroom-whiteboard-bg") || board.dataset.bg || "grid");
+
+        if (bgBtn && bgPanel) {
+            bgBtn.onclick = e => {
+                e.stopPropagation();
+                bgPanel.classList.toggle("hidden");
+            };
+            bgPanel.querySelectorAll("button[data-bg]").forEach(btn => {
+                btn.onclick = () => {
+                    applyBoardBackground(btn.dataset.bg);
+                    bgPanel.classList.add("hidden");
+                };
+            });
+            document.addEventListener("click", e => {
+                if (!bgPanel.classList.contains("hidden") && !e.target.closest("#bgPanel") && e.target !== bgBtn) {
+                    bgPanel.classList.add("hidden");
+                }
+            });
+        }
         window.addEventListener("beforeunload", () => {
             try {
                 saveLayout(false)
