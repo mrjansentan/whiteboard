@@ -3927,6 +3927,107 @@
 
     .wheel-winner-remove.hidden {
         display: none !important;
+    }/* PAGES ONLY: SAFE BUILD FROM WORKING V6 */
+
+    .page-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        flex-wrap: nowrap !important;
+        border-right: 2px solid rgba(17, 24, 39, .18) !important;
+        padding-right: 7px !important;
+        margin-right: 2px !important;
+    }
+
+    .page-indicator {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 30px !important;
+        min-width: 42px !important;
+        padding: 0 8px !important;
+        border: 2px solid #111827 !important;
+        border-radius: 10px !important;
+        background: #ffffff !important;
+        box-shadow: 2px 2px 0 #111827 !important;
+        font-size: 11px !important;
+        font-weight: 950 !important;
+        white-space: nowrap !important;
+    }
+
+    .toolbar {
+        z-index: 100000 !important;
+    }
+
+    #objectLayer {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 60 !important;
+        pointer-events: none !important;
+    }
+
+    #objectLayer .item {
+        pointer-events: auto !important;
+    }/* PAGE CONTROL CLICK FIX */
+
+    .page-actions button {
+        pointer-events: auto !important;
+        position: relative !important;
+        z-index: 100001 !important;
+    }/* LARGE CANVAS CHECKPOINT: 4000 × 2500 ONLY, NO ZOOM */
+
+    :root {
+        --large-canvas-w: 4000px;
+        --large-canvas-h: 2500px;
+    }
+
+    .board-wrap {
+        overflow: auto !important;
+        padding: 12px !important;
+    }
+
+    #whiteboard {
+        width: var(--large-canvas-w) !important;
+        height: var(--large-canvas-h) !important;
+        min-width: var(--large-canvas-w) !important;
+        min-height: var(--large-canvas-h) !important;
+        max-width: none !important;
+        max-height: none !important;
+        transform: none !important;
+    }
+
+    #drawCanvas, #objectLayer {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    #objectLayer {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 60 !important;
+        pointer-events: none !important;
+    }
+
+    #objectLayer .item {
+        pointer-events: auto !important;
+    }
+
+    #drawCanvas {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 40 !important;
+    }
+
+    body:not(.draw-mode) #drawCanvas {
+        pointer-events: none !important;
+    }/* SAFE CANVAS NAVIGATION CONTROLS */
+
+    #topLeftCanvasBtn, #centerCanvasBtn {
+        background: #eff6ff !important;
+    }
+
+    #topLeftCanvasBtn:hover, #centerCanvasBtn:hover {
+        background: #dbeafe !important;
     }
     </style>
 </head>
@@ -3943,6 +4044,17 @@
                 <label for="fileInput" class="file-btn widget-btn picture-btn">Picture</label>
                 <input id="fileInput" type="file" accept="image/*" multiple>
                 <button id="drawBtn" class="widget-btn" type="button">Draw</button>
+            </div>
+
+            <div class="toolbar-group page-actions" aria-label="Pages">
+                <button id="pagePrevBtn" class="icon-action" type="button" title="Previous page" onclick="event.preventDefault(); event.stopPropagation(); window.pagePrev();">‹</button>
+                <span id="pageIndicator" class="page-indicator">1/1</span>
+                <button id="pageNextBtn" class="icon-action" type="button" title="Next page" onclick="event.preventDefault(); event.stopPropagation(); window.pageNext();">›</button>
+                <button id="pageAddBtn" class="icon-action" type="button" title="Add page" onclick="event.preventDefault(); event.stopPropagation(); window.pageAdd();">＋</button>
+                <button id="pageDuplicateBtn" class="icon-action" type="button" title="Duplicate page" onclick="event.preventDefault(); event.stopPropagation(); window.pageDuplicate();">⧉</button>
+                <button id="pageDeleteBtn" class="icon-action danger" type="button" title="Delete page" onclick="event.preventDefault(); event.stopPropagation(); window.pageDelete();">−</button>
+                <button id="topLeftCanvasBtn" class="icon-action" type="button" title="Top-left of canvas" onclick="event.preventDefault(); event.stopPropagation(); window.goCanvasTopLeft();">⌜</button>
+                <button id="centerCanvasBtn" class="icon-action" type="button" title="Centre canvas" onclick="event.preventDefault(); event.stopPropagation(); window.centerCanvas();">⊙</button>
             </div>
 
             <div class="toolbar-group compact-actions" aria-label="Actions">
@@ -4100,12 +4212,32 @@
         const closeHelpBtn = document.getElementById("closeHelpBtn");
         const bgBtn = document.getElementById("bgBtn");
         const bgPanel = document.getElementById("bgPanel");
+        const pagePrevBtn = document.getElementById("pagePrevBtn");
+        const pageNextBtn = document.getElementById("pageNextBtn");
+        const pageAddBtn = document.getElementById("pageAddBtn");
+        const pageDuplicateBtn = document.getElementById("pageDuplicateBtn");
+        const pageDeleteBtn = document.getElementById("pageDeleteBtn");
+        const pageIndicator = document.getElementById("pageIndicator");
+        const topLeftCanvasBtn = document.getElementById("topLeftCanvasBtn");
+        const centerCanvasBtn = document.getElementById("centerCanvasBtn");
 
         let zTop = 5;
         let selected = new Set();
         let classLists = {};
         let dragState = null;
         let nextPos = 0;
+
+        let pages = [{
+            name: "Page 1",
+            bg: "grid",
+            items: [],
+            drawing: null
+        }];
+        let currentPageIndex = 0;
+        let suppressPageCapture = false;
+
+        const CANVAS_W = 4000;
+        const CANVAS_H = 2500;
 
 
         let drawTool = "select";
@@ -4118,10 +4250,10 @@
         function resizeDrawCanvas(keepDrawing=true) {
             const oldImage = keepDrawing && drawCanvas.width && drawCanvas.height ? drawCanvas.toDataURL("image/png") : null;
             const dpr = window.devicePixelRatio || 1;
-            drawCanvas.width = Math.round(board.clientWidth * dpr);
-            drawCanvas.height = Math.round(board.clientHeight * dpr);
-            drawCanvas.style.width = board.clientWidth + "px";
-            drawCanvas.style.height = board.clientHeight + "px";
+            drawCanvas.width = Math.round(CANVAS_W * dpr);
+            drawCanvas.height = Math.round(CANVAS_H * dpr);
+            drawCanvas.style.width = CANVAS_W + "px";
+            drawCanvas.style.height = CANVAS_H + "px";
             drawCtx = drawCanvas.getContext("2d");
             drawCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
             drawCtx.lineCap = "round";
@@ -4129,7 +4261,7 @@
 
             if (oldImage) {
                 const img = new Image();
-                img.onload = () => drawCtx.drawImage(img, 0, 0, board.clientWidth, board.clientHeight);
+                img.onload = () => drawCtx.drawImage(img, 0, 0, CANVAS_W, CANVAS_H);
                 img.src = oldImage;
             }
         }
@@ -4219,7 +4351,7 @@
         function clearDrawing() {
             if (!confirm("Clear all drawings?"))
                 return;
-            drawCtx.clearRect(0, 0, board.clientWidth, board.clientHeight);
+            drawCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
         }
 
 
@@ -5741,6 +5873,157 @@
             draw();
         }
 
+
+
+        function goCanvasTopLeft() {
+            boardWrap.scrollTo({
+                left: 0,
+                top: 0,
+                behavior: "smooth"
+            });
+            showToast("Top-left of canvas");
+        }
+
+        function centerCanvas() {
+            const left = Math.max(0, (CANVAS_W - boardWrap.clientWidth) / 2);
+            const top = Math.max(0, (CANVAS_H - boardWrap.clientHeight) / 2);
+            boardWrap.scrollTo({
+                left,
+                top,
+                behavior: "smooth"
+            });
+            showToast("Centre canvas");
+        }
+
+        window.goCanvasTopLeft = goCanvasTopLeft;
+        window.centerCanvas = centerCanvas;
+
+        function clearBoardDOMOnly() {
+            objectLayer.querySelectorAll(".item").forEach(i => {
+                if (i._cleanup)
+                    i._cleanup();
+                i.remove()
+            });
+            clearSelection();
+            drawCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+        }
+
+        function captureCurrentPage() {
+            if (suppressPageCapture)
+                return;
+            const page = pages[currentPageIndex] || (pages[currentPageIndex] = {});
+            page.bg = board.dataset.bg || "grid";
+            page.items = [...objectLayer.querySelectorAll(".item")].map(serializeItem);
+            try {
+                page.drawing = drawCanvas.toDataURL("image/png");
+            } catch {
+                page.drawing = null;
+            }
+        }
+
+        function restorePage(index) {
+            captureCurrentPage();
+            currentPageIndex = clamp(index, 0, pages.length - 1);
+            const page = pages[currentPageIndex];
+
+            suppressPageCapture = true;
+            clearBoardDOMOnly();
+
+            if (page.bg)
+                applyBoardBackground(page.bg);
+            resizeDrawCanvas(false);
+            setupPagesOnly();
+            (page.items || []).forEach(createFromData);
+
+            if (page.drawing) {
+                const img = new Image();
+                img.onload = () => drawCtx.drawImage(img, 0, 0, CANVAS_W, CANVAS_H);
+                img.src = page.drawing;
+            }
+
+            suppressPageCapture = false;
+            updatePageUI();
+            updateStatus();
+            showToast(page.name || `Page ${currentPageIndex + 1}`);
+        }
+
+        function updatePageUI() {
+            if (pageIndicator)
+                pageIndicator.textContent = `${currentPageIndex + 1}/${pages.length}`;
+            if (pagePrevBtn)
+                pagePrevBtn.disabled = currentPageIndex === 0;
+            if (pageNextBtn)
+                pageNextBtn.disabled = currentPageIndex === pages.length - 1;
+            if (pageDeleteBtn)
+                pageDeleteBtn.disabled = pages.length <= 1;
+        }
+
+        function addPage(copy=false) {
+            captureCurrentPage();
+            const base = copy
+            ? JSON.parse(JSON.stringify(pages[currentPageIndex]))
+            : {
+                name: `Page ${pages.length + 1}`,
+                bg: board.dataset.bg || "grid",
+                items: [],
+                drawing: null
+            };
+            if (copy)
+                base.name = `Page ${pages.length + 1}`;
+            pages.splice(currentPageIndex + 1, 0, base);
+            restorePage(currentPageIndex + 1);
+        }
+
+        function deletePage() {
+            if (pages.length <= 1)
+                return;
+            if (!confirm("Delete this page?"))
+                return;
+            pages.splice(currentPageIndex, 1);
+            restorePage(Math.min(currentPageIndex, pages.length - 1));
+        }
+
+        function pagePrev() {
+            restorePage(currentPageIndex - 1);
+        }
+        function pageNext() {
+            restorePage(currentPageIndex + 1);
+        }
+        function pageAdd() {
+            addPage(false);
+        }
+        function pageDuplicate() {
+            addPage(true);
+        }
+        function pageDelete() {
+            deletePage();
+        }
+
+        window.pagePrev = pagePrev;
+        window.pageNext = pageNext;
+        window.pageAdd = pageAdd;
+        window.pageDuplicate = pageDuplicate;
+        window.pageDelete = pageDelete;
+
+        function setupPagesOnly() {
+            if (pagePrevBtn)
+                pagePrevBtn.onclick = pagePrev;
+            if (pageNextBtn)
+                pageNextBtn.onclick = pageNext;
+            if (pageAddBtn)
+                pageAddBtn.onclick = pageAdd;
+            if (pageDuplicateBtn)
+                pageDuplicateBtn.onclick = pageDuplicate;
+            if (pageDeleteBtn)
+                pageDeleteBtn.onclick = pageDelete;
+            if (topLeftCanvasBtn)
+                topLeftCanvasBtn.onclick = goCanvasTopLeft;
+            if (centerCanvasBtn)
+                centerCanvasBtn.onclick = centerCanvas;
+            updatePageUI();
+        }
+
+
         function createFromData(d) {
             if (d.type === "image")
                 addPicture(d.src, d);
@@ -5764,13 +6047,14 @@
             return base;
         }
         function saveLayout(download=true) {
+            captureCurrentPage();
             const data = {
-                version: 2,
+                version: 3,
+                phase: "pages-only",
                 created: new Date().toISOString(),
                 bg: board.dataset.bg || "grid",
-                items: [...objectLayer.querySelectorAll(".item")].map(serializeItem),
-                classLists,
-                drawing: drawCanvas.toDataURL("image/png")
+                pages,
+                classLists
             };
             localStorage.setItem("classroom-whiteboard-layout-v2", JSON.stringify(data));
             if (download) {
@@ -5779,32 +6063,36 @@
                 });
                 const a = document.createElement("a");
                 a.href = URL.createObjectURL(blob);
-                a.download = "classroom-whiteboard-layout.json";
+                a.download = "classroom-whiteboard-pages-layout.json";
                 a.click();
                 URL.revokeObjectURL(a.href);
             }
             showToast("Layout saved");
         }
         function loadLayout(data) {
-            objectLayer.querySelectorAll(".item").forEach(i => {
-                if (i._cleanup)
-                    i._cleanup();
-                i.remove()
-            });
-            clearSelection();
-            if (data.bg)
-                applyBoardBackground(data.bg);
-            classLists = data.classLists || classLists;
-            updateClassSelect();
-            (data.items || []).forEach(createFromData);
-            resizeDrawCanvas(false);
-            if (data.drawing) {
-                const img = new Image();
-                img.onload = () => drawCtx.drawImage(img, 0, 0, board.clientWidth, board.clientHeight);
-                img.src = data.drawing;
+            if (data.pages && Array.isArray(data.pages)) {
+                pages = data.pages.length ? data.pages : [{
+                    name: "Page 1",
+                    bg: "grid",
+                    items: [],
+                    drawing: null
+                }];
+                currentPageIndex = 0;
+                classLists = data.classLists || classLists;
+                updateClassSelect();
+                restorePage(0);
+            } else {
+                pages = [{
+                    name: "Page 1",
+                    bg: data.bg || "grid",
+                    items: data.items || [],
+                    drawing: data.drawing || null
+                }];
+                currentPageIndex = 0;
+                classLists = data.classLists || classLists;
+                updateClassSelect();
+                restorePage(0);
             }
-            clampAllItemsIntoView();
-            updateStatus();
             showToast("Layout loaded");
         }
 
@@ -5893,15 +6181,11 @@
             classFolderInput.value = ""
         };
         clearBtn.onclick = () => {
-            if (confirm("Clear the whole board?")) {
-                objectLayer.querySelectorAll(".item").forEach(i => {
-                    if (i._cleanup)
-                        i._cleanup();
-                    i.remove()
-                });
-                drawCtx.clearRect(0, 0, board.clientWidth, board.clientHeight);
-                clearSelection();
-                updateStatus()
+            if (confirm("Clear this page?")) {
+                clearBoardDOMOnly();
+                captureCurrentPage();
+                updateStatus();
+                showToast("Page cleared")
             }
         };
         saveBtn.onclick = () => saveLayout(true);
@@ -5965,6 +6249,7 @@
         }
         window.addEventListener("beforeunload", () => {
             try {
+                captureCurrentPage();
                 saveLayout(false)
             } catch {}
         });
