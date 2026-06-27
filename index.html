@@ -4038,6 +4038,18 @@
 
     body.two-finger-panning, body.two-finger-panning * {
         cursor: grabbing !important;
+    }/* IPAD GESTURE FIX: one finger does not pan blank canvas; two fingers pan */
+
+    .board-wrap, #whiteboard, #objectLayer, #drawCanvas {
+        touch-action: none !important;
+    }
+
+    #objectLayer .item, #objectLayer .item *, .widget, .widget * {
+        touch-action: manipulation !important;
+    }
+
+    body.two-finger-panning {
+        overflow: hidden !important;
     }
     </style>
 </head>
@@ -6016,6 +6028,7 @@
         window.pageDelete = pageDelete;
 
 
+
         let twoFingerPan = null;
 
         function getTouchMidpoint(touches) {
@@ -6023,6 +6036,10 @@
                 x: (touches[0].clientX + touches[1].clientX) / 2,
                 y: (touches[0].clientY + touches[1].clientY) / 2
             };
+        }
+
+        function isWidgetTouch(event) {
+            return !!event.target.closest(".item, .widget, button, input, textarea, select, [contenteditable=true], details, summary");
         }
 
         function setupTwoFingerPan() {
@@ -6036,6 +6053,15 @@
                         scrollTop: boardWrap.scrollTop
                     };
                     document.body.classList.add("two-finger-panning");
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return;
+                }
+
+                // On blank canvas, one finger should not pan the board.
+                // One-finger touches inside widgets/buttons are left alone so widgets still work.
+                if (event.touches.length === 1 && !isWidgetTouch(event)) {
+                    event.preventDefault();
                 }
             }, {
                 passive: false
@@ -6052,6 +6078,12 @@
 
                     boardWrap.scrollLeft = twoFingerPan.scrollLeft - dx;
                     boardWrap.scrollTop = twoFingerPan.scrollTop - dy;
+                    return;
+                }
+
+                // Stop native one-finger canvas panning on blank board area.
+                if (event.touches.length === 1 && !isWidgetTouch(event)) {
+                    event.preventDefault();
                 }
             }, {
                 passive: false
