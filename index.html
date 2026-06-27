@@ -4028,6 +4028,16 @@
 
     #topLeftCanvasBtn:hover, #centerCanvasBtn:hover {
         background: #dbeafe !important;
+    }/* IPAD TWO-FINGER PAN SUPPORT */
+
+    .board-wrap {
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-x pan-y !important;
+        overscroll-behavior: contain !important;
+    }
+
+    body.two-finger-panning, body.two-finger-panning * {
+        cursor: grabbing !important;
     }
     </style>
 </head>
@@ -6005,6 +6015,66 @@
         window.pageDuplicate = pageDuplicate;
         window.pageDelete = pageDelete;
 
+
+        let twoFingerPan = null;
+
+        function getTouchMidpoint(touches) {
+            return {
+                x: (touches[0].clientX + touches[1].clientX) / 2,
+                y: (touches[0].clientY + touches[1].clientY) / 2
+            };
+        }
+
+        function setupTwoFingerPan() {
+            boardWrap.addEventListener("touchstart", event => {
+                if (event.touches.length === 2) {
+                    const mid = getTouchMidpoint(event.touches);
+                    twoFingerPan = {
+                        x: mid.x,
+                        y: mid.y,
+                        scrollLeft: boardWrap.scrollLeft,
+                        scrollTop: boardWrap.scrollTop
+                    };
+                    document.body.classList.add("two-finger-panning");
+                }
+            }, {
+                passive: false
+            });
+
+            boardWrap.addEventListener("touchmove", event => {
+                if (event.touches.length === 2 && twoFingerPan) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    const mid = getTouchMidpoint(event.touches);
+                    const dx = mid.x - twoFingerPan.x;
+                    const dy = mid.y - twoFingerPan.y;
+
+                    boardWrap.scrollLeft = twoFingerPan.scrollLeft - dx;
+                    boardWrap.scrollTop = twoFingerPan.scrollTop - dy;
+                }
+            }, {
+                passive: false
+            });
+
+            boardWrap.addEventListener("touchend", event => {
+                if (event.touches.length < 2) {
+                    twoFingerPan = null;
+                    document.body.classList.remove("two-finger-panning");
+                }
+            }, {
+                passive: false
+            });
+
+            boardWrap.addEventListener("touchcancel", () => {
+                twoFingerPan = null;
+                document.body.classList.remove("two-finger-panning");
+            }, {
+                passive: false
+            });
+        }
+
+
         function setupPagesOnly() {
             if (pagePrevBtn)
                 pagePrevBtn.onclick = pagePrev;
@@ -6020,6 +6090,7 @@
                 topLeftCanvasBtn.onclick = goCanvasTopLeft;
             if (centerCanvasBtn)
                 centerCanvasBtn.onclick = centerCanvas;
+            setupTwoFingerPan();
             updatePageUI();
         }
 
